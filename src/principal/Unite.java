@@ -1,7 +1,9 @@
 package principal;
 
-public class Unite {
-	protected ArmeT armeT= new ArmeT(0,0,7,0);
+import classesDeTest.ArmeTTest;
+
+public abstract class Unite {
+	protected ArmeT armeT= new ArmeTTest();
 	protected ArmeC armeC;
 	protected int cc, ct, f, e, pv = 0, i, a, cd, svg;
 	protected int blAvant, blFlanc, blArriere;
@@ -90,5 +92,4 @@ public class Unite {
 	public int getPosY() {
 		return posY;
 	}
-
 }

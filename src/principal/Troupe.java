@@ -2,7 +2,7 @@ package principal;
 
 import java.util.ArrayList;
 
-public class Troupe<T extends Unite> {
+public abstract class Troupe<T extends Unite> {
 	ArrayList<T> troupe;
 	int nbMin, nbMax;
 

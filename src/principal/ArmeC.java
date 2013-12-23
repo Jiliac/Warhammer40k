@@ -1,5 +1,5 @@
 package principal;
 
-public class ArmeC {
+public abstract class ArmeC {
 	public ArmeC(){}
 }

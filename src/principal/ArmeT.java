@@ -1,6 +1,6 @@
 package principal;
 
-public class ArmeT {
+public abstract class ArmeT {
 	private int portee, f, pa, nbTir;
 	private String typeOption;
 
@@ -15,6 +15,10 @@ public class ArmeT {
 
 	public ArmeT(int portee, int f, int pa, int nbTir) {
 		this(portee, f, pa, nbTir, "");
+	}
+	
+	public ArmeT(){
+		this(0,0,7,0);
 	}
 
 	// ******************** getters et setters ***************
@@ -45,5 +49,8 @@ public class ArmeT {
 
 	protected void setTypeOption(String typeOption) {
 		this.typeOption = typeOption;
+	}
+	public void setPa(int pa){
+		this.pa=pa;
 	}
 }
