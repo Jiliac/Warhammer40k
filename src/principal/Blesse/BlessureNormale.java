@@ -42,7 +42,7 @@ public class BlessureNormale extends BlessureMere implements Blessure {
 		if (jet >= tableJet[f - 1][e - 1])
 			retour = new SauvegardeNormale(attaquant, defenseur);
 		else
-			retour = new SauvegardeFausse();
+			retour = new SauvegardeFausse(attaquant,defenseur);
 
 		return retour;
 	}

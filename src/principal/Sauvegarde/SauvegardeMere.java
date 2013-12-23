@@ -5,9 +5,6 @@ import principal.Unite;
 public abstract class SauvegardeMere {
 	protected Unite attaquant=null, defenseur=null;
 
-	public SauvegardeMere() {
-	}
-
 	public SauvegardeMere(Unite attaquant, Unite defenseur) {
 		this.attaquant = attaquant;
 		this.defenseur = defenseur;
