@@ -1,9 +1,9 @@
 package principal.Sauvegarde;
 
-import classesDeTest.UniteTest;
 import de.De;
 import de.De6;
 import principal.Unite;
+import principal.UniteTest;
 import principal.Sauvegarde.Sauvegarde;
 
 public class SauvegardeNormale extends SauvegardeMere implements Sauvegarde {
@@ -12,7 +12,10 @@ public class SauvegardeNormale extends SauvegardeMere implements Sauvegarde {
 
 	public SauvegardeNormale(Unite attaquant, Unite defenseur) {
 		super(attaquant,defenseur);
-		this.pa=attaquant.getArmeT().getPa();
+		if(attaquant.getArmeT()!=null)
+			this.pa=attaquant.getArmeT().getPa();
+		else
+			System.out.println(attaquant.getArmeT());
 		this.svg=defenseur.getSvg();
 	}
 

@@ -4,7 +4,7 @@ import de.De;
 import de.De6;
 import principal.Unite;
 import principal.Blesse.Blessure;
-import principal.Blesse.BlessureFausse;
+import principal.Blesse.BlessureInutile;
 import principal.Blesse.BlessureNormale;
 
 public class ToucheCNormale extends ToucheCMere implements ToucheC{
@@ -31,7 +31,7 @@ public class ToucheCNormale extends ToucheCMere implements ToucheC{
 		if (de.jet() >= tableJet[ccAt - 1][ccDef - 1])
 			blessure=new BlessureNormale(attaquant,defenseur);
 		else
-			blessure=new BlessureFausse(attaquant,defenseur);
+			blessure=new BlessureInutile(attaquant,defenseur);
 		return blessure;
 	}
 }

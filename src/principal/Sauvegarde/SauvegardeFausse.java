@@ -11,6 +11,7 @@ public class SauvegardeFausse
 	}
 
 	public boolean sauver() {
+		System.out.println("test de sauvegardeFausse");
 		return false;
 	}
 }

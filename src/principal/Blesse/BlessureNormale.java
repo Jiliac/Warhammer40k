@@ -4,12 +4,11 @@ import de.De;
 import de.De6;
 import principal.Unite;
 import principal.Sauvegarde.Sauvegarde;
-import principal.Sauvegarde.SauvegardeFausse;
+import principal.Sauvegarde.SauvegardeInutile;
 import principal.Sauvegarde.SauvegardeNormale;
 
 public class BlessureNormale extends BlessureMere implements Blessure {
 	private int f, e;
-	private Unite attaquant, defenseur;
 	private int jet = -1;
 
 	public BlessureNormale(Unite attaquant, Unite defenseur) {
@@ -42,7 +41,7 @@ public class BlessureNormale extends BlessureMere implements Blessure {
 		if (jet >= tableJet[f - 1][e - 1])
 			retour = new SauvegardeNormale(attaquant, defenseur);
 		else
-			retour = new SauvegardeFausse(attaquant,defenseur);
+			retour = new SauvegardeInutile(attaquant,defenseur);
 
 		return retour;
 	}

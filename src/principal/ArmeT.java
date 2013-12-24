@@ -1,11 +1,27 @@
 package principal;
 
+import principal.Blesse.Blessure;
+
 public abstract class ArmeT {
-	private int portee, f, pa, nbTir;
-	private String typeOption;
+	protected boolean used;
+	protected int portee;
+	protected int f;
+	protected int pa;
+	protected int nbTir;
+	protected String typeOption;
+
+	// ********************* les actions **********************
+
+	public abstract void attaquerT(Unite attaquant, Unite defenseur, Blessure blessure);
+
+	public abstract boolean isAbleToCharge();
+	
+	public boolean aPorte(Unite attaquant,Unite defenseur){
+		return attaquant.aPorte(portee, defenseur);
+	}
 
 	// ********************* constructeur **********************
-	public ArmeT(int portee, int f, int pa, int nbTir, String typeOption) {
+	protected ArmeT(int portee, int f, int pa, int nbTir, String typeOption) {
 		this.portee = portee;
 		this.f = f;
 		this.pa = pa;
@@ -13,12 +29,8 @@ public abstract class ArmeT {
 		this.typeOption = typeOption;
 	}
 
-	public ArmeT(int portee, int f, int pa, int nbTir) {
+	protected ArmeT(int portee, int f, int pa, int nbTir) {
 		this(portee, f, pa, nbTir, "");
-	}
-	
-	public ArmeT(){
-		this(0,0,7,0);
 	}
 
 	// ******************** getters et setters ***************
@@ -50,7 +62,8 @@ public abstract class ArmeT {
 	protected void setTypeOption(String typeOption) {
 		this.typeOption = typeOption;
 	}
-	public void setPa(int pa){
-		this.pa=pa;
+
+	public void setPa(int pa) {
+		this.pa = pa;
 	}
 }

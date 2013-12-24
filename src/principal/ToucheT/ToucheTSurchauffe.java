@@ -1,8 +1,8 @@
 package principal.ToucheT;
 
-import classesDeTest.UniteTest;
 import de.De6;
 import principal.Unite;
+import principal.UniteTest;
 import principal.Blesse.Blessure;
 import principal.Sauvegarde.Sauvegarde;
 import principal.Sauvegarde.SauvegardeNormale;
@@ -13,7 +13,7 @@ public class ToucheTSurchauffe extends ToucheTMere implements ToucheT{
 		super(attaquant, defenseur);
 	}
 	
-	public Blessure toucheT(){
+	public Blessure toucherT(){
 		//creation des variables...
 		De6 de = new De6();
 		int jet = de.jet();
@@ -26,7 +26,7 @@ public class ToucheTSurchauffe extends ToucheTMere implements ToucheT{
 		
 		// et sinon on traite la variable normalement
 		ToucheT retour = new ToucheTNormale(attaquant,defenseur,jet);
-		return retour.toucheT();
+		return retour.toucherT();
 		
 	}
 } 

@@ -17,7 +17,7 @@ public class ToucheTNormale extends ToucheTMere implements ToucheT{
 		this.jet=jet;
 	}
 
-	public Blessure toucheT() {
+	public Blessure toucherT() {
 		Blessure retour;
 		De de = new De6();
 		if(jet==-1)
