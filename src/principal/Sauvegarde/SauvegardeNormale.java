@@ -19,11 +19,14 @@ public class SauvegardeNormale extends SauvegardeMere implements Sauvegarde {
 		this.svg=defenseur.getSvg();
 	}
 
-	public boolean sauver() {
+	public void sauver() {
 		De de = new De6();
-		boolean reussite = false;
+		boolean reussite;
 		if (de.jet() >= svg && pa > svg)
 			reussite = true;
-		return reussite;
+		else
+			reussite=false;
+		if (reussite == false)
+			defenseur.pertePv();
 	}
 }

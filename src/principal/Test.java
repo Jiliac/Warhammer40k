@@ -1,10 +1,8 @@
 package principal;
 
-import principal.Blesse.Blessure;
-import principal.Blesse.BlessureNormale;
-import classesDeTest.ArmeTTest;
 import classesDeTest.Ceraste;
 import classesDeTest.SpaceMarine;
+import de.De6;
 
 public class Test {
 	static public void main(String[] arg0) {

@@ -9,9 +9,7 @@ public class SauvegardeInutile extends SauvegardeMere implements Sauvegarde{
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public boolean sauver() {
-		return true;
+	public void sauver() {
 	}
 
 }

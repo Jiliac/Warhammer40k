@@ -11,6 +11,7 @@ import principal.Sauvegarde.SauvegardeNormale;
 import principal.ToucheT.ToucheT;
 import principal.ToucheT.ToucheTNormale;
 import principal.ToucheT.ToucheTSurchauffe;
+import principal.armeT.attaqueT.AttaqueTClassique;
 
 public abstract class ArmeT {
 	protected boolean used;
@@ -27,16 +28,11 @@ public abstract class ArmeT {
 	public boolean aPorte(Unite attaquant, Unite defenseur) {
 		return attaquant.aPorte(portee, defenseur);
 	}
-	
-	public void attaquerT(Unite attaquant, Unite defenseur){
-		ToucheT toucheT= this.associationToucheT(attaquant, defenseur);
-		Blessure blessure = this.associationBlessure(attaquant, defenseur,toucheT.toucherT());
-		Sauvegarde sauvegarde = this.associationSauvegarde(attaquant,defenseur,blessure.blesser());
-		if(sauvegarde.sauver()==false)
-			defenseur.pertePv();
-	}
 
-	
+	public void attaquerT(Unite attaquant, Unite defenseur) {
+		AttaqueTClassique atc = new AttaqueTClassique(attaquant,defenseur,this);
+		atc.attaquerT();
+	}
 
 	// ********************* constructeur **********************
 	protected ArmeT(int portee, int f, int pa, int nbTir, String toucheT,
@@ -66,12 +62,13 @@ public abstract class ArmeT {
 		return retour;
 	}
 
-	public Blessure associationBlessure(Unite attaquant, Unite defenseur, Blessure blessure) {
+	public Blessure associationBlessure(Unite attaquant, Unite defenseur,
+			Blessure blessure) {
 		Blessure retour = null;
-		
-		if (blessure.getClass().toString()==BlessureInutile.class.toString())
+
+		if (blessure instanceof BlessureInutile)
 			retour = blessure;
-		if (typeBlessure == "normal")
+		else if (typeBlessure == "normal")
 			retour = new BlessureNormale(attaquant, defenseur);
 		else if (typeBlessure == "perforante")
 			retour = new BlessurePerforante(attaquant, defenseur);
@@ -81,10 +78,11 @@ public abstract class ArmeT {
 		return retour;
 	}
 
-	public Sauvegarde associationSauvegarde(Unite attaquant, Unite defenseur, Sauvegarde sauvegarde) {
+	public Sauvegarde associationSauvegarde(Unite attaquant, Unite defenseur,
+			Sauvegarde sauvegarde) {
 		Sauvegarde retour = null;
-		
-		if(sauvegarde.getClass().toString()==SauvegardeInutile.class.toString())
+
+		if (sauvegarde instanceof SauvegardeInutile)
 			retour = sauvegarde;
 		else if (typeSauvegarde == "normal")
 			retour = new SauvegardeNormale(attaquant, defenseur);

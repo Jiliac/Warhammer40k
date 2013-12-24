@@ -13,22 +13,11 @@ public class Infanterie extends Unite {
 	// ******** les actions *****************
 
 	public void attaquerC(Unite defenseur) {
-
-		// Defenseur vivant??
-
-		// is able to charge??
-
-		ToucheC toucheC;
-		Blessure blessure;
-		Sauvegarde sauvegarde;
-		boolean reussite;
-
-		toucheC = new ToucheCNormale(this, defenseur);
-		blessure = toucheC.toucherC();
-		sauvegarde = blessure.blesser();
-		reussite = sauvegarde.sauver();
-		if (reussite == false)
-			defenseur.pertePv();
+		this.save();
+		
+		this.armeC.attaquerC(this,defenseur);
+		
+		this.reset();
 	}
 
 	public void attaquerT(Unite defenseur) {
@@ -46,6 +35,8 @@ public class Infanterie extends Unite {
 
 	// ********** la memoire de la classe ********
 
+	// ATTENTION ces deux methodes s'appellent respectivement au debut et a la fin des methodes de combat!!!
+	
 	private int ccs, cts, fs, es, is, as, cds, svgS;
 	private ArmeT armeTs;
 	private ArmeC armeCs;

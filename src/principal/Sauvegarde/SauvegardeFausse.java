@@ -10,8 +10,7 @@ public class SauvegardeFausse
 		// TODO Auto-generated constructor stub
 	}
 
-	public boolean sauver() {
-		System.out.println("test de sauvegardeFausse");
-		return false;
+	public void sauver() {
+		this.defenseur.pertePv();
 	}
 }

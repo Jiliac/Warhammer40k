@@ -9,7 +9,7 @@ import classesDeTest.ArmeTTest;
 public abstract class Unite {
 	protected ArmeT armeT;
 	protected ArmeC armeC;
-	protected int cc, ct, f, e, pv = 0, i, a, cd, svg;
+	protected int cc, ct, f, e, pv, i, a, cd, svg;
 	protected int blAvant, blFlanc, blArriere;
 	protected int posX = 0, posY = 0;
 
@@ -48,6 +48,7 @@ public abstract class Unite {
 	// ************ constructeur ********************
 	public Unite() {
 		this.armeT = new ArmeTTest();
+		this.armeC = new ArmeCTest();
 	}
 
 	// ************ les points de vie ******************

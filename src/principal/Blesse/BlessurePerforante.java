@@ -20,9 +20,8 @@ public class BlessurePerforante extends BlessureMere implements Blessure {
 		Sauvegarde retour;
 
 		if (jet == 6) {
-			Unite at = attaquant;
 			attaquant.getArmeT().setPa(2);
-			retour = new SauvegardeNormale(at, defenseur);
+			retour = new SauvegardeNormale(attaquant, defenseur);
 		} else {
 			BlessureNormale blessure = new BlessureNormale(attaquant,
 					defenseur, jet);

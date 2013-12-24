@@ -30,11 +30,12 @@ public class SauvegardeCouvert extends SauvegardeMere implements Sauvegarde{
 		return svg;
 	}
 	
-	public boolean sauver(){
+	public void sauver(){
 		De de = new De6();
 		boolean reussite = false;
 		if (de.jet() >= svgC)
 			reussite = true;
-		return reussite;
+		if (reussite == false)
+			defenseur.pertePv();
 	}
 }

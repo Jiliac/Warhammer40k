@@ -5,22 +5,27 @@ import de.De6;
 import principal.Unite;
 import principal.Sauvegarde.Sauvegarde;
 
-public class SauvegardeInvulnerable extends SauvegardeNormale implements Sauvegarde{
+public class SauvegardeInvulnerable extends SauvegardeMere implements
+		Sauvegarde {
 	private int svgi;
-	public SauvegardeInvulnerable(Unite attaquant,Unite defenseur,int svgi){
-		super(attaquant,defenseur);
-		this.svgi=svgi;
+
+	public SauvegardeInvulnerable(Unite attaquant, Unite defenseur, int svgi) {
+		super(attaquant, defenseur);
+		this.svgi = svgi;
 	}
-	
-	public SauvegardeInvulnerable(SauvegardeNormale sauv,int svgi){
-		this(sauv.getAttaquant(),sauv.getDefenseur(),svgi);
+
+	public SauvegardeInvulnerable(SauvegardeNormale sauv, int svgi) {
+		this(sauv.getAttaquant(), sauv.getDefenseur(), svgi);
 	}
-	
-	public boolean sauver(){
+
+	public void sauver() {
+		boolean reussite;
 		De de = new De6();
-		boolean reussite = false;
 		if (de.jet() >= svgi)
 			reussite = true;
-		return reussite;
+		else
+			reussite = false;
+		if (reussite == false)
+			defenseur.pertePv();
 	}
 }

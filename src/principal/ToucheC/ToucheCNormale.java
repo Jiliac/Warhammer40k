@@ -18,6 +18,7 @@ public class ToucheCNormale extends ToucheCMere implements ToucheC{
 	public Blessure toucherC(){
 		De de = new De6();
 		Blessure blessure;
+		int jet = de.jet();
 		int tableJet[][] = { { 4, 4, 5, 5, 5, 5, 5, 5, 5, 5 },
 				{ 3, 4, 4, 4, 5, 5, 5, 5, 5, 5 },
 				{ 3, 3, 4, 4, 4, 4, 5, 5, 5, 5 },
@@ -28,7 +29,7 @@ public class ToucheCNormale extends ToucheCMere implements ToucheC{
 				{ 3, 3, 3, 3, 3, 3, 3, 4, 4, 4 },
 				{ 3, 3, 3, 3, 3, 3, 3, 3, 4, 4 },
 				{ 3, 3, 3, 3, 3, 3, 3, 3, 3, 4 } };
-		if (de.jet() >= tableJet[ccAt - 1][ccDef - 1])
+		if (jet >= tableJet[ccAt - 1][ccDef - 1])
 			blessure=new BlessureNormale(attaquant,defenseur);
 		else
 			blessure=new BlessureInutile(attaquant,defenseur);
