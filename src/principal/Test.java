@@ -17,5 +17,16 @@ public class Test {
 		for(int i=0;i<5;i++)
 			c.attaquerC(sm);
 		System.out.println(sm);
+		
+		/*
+		 * ATTENTION
+		 * plein de truc a test:
+		 * 1) les tir, combatC,combatT
+		 * 2) les types et types optionnelles d'armes...
+		 * 
+		 * 
+		 */
+		
+		
 	}
 }

@@ -9,56 +9,75 @@ import principal.ToucheT.ToucheT;
 import principal.ToucheT.ToucheTNormale;
 
 public class Infanterie extends Unite {
-	
+
 	// ******** les actions *****************
-	
+
 	public void attaquerC(Unite defenseur) {
-		
-		//Defenseur vivant??
-		
-		//is able to charge??
-		
+
+		// Defenseur vivant??
+
+		// is able to charge??
+
 		ToucheC toucheC;
 		Blessure blessure;
 		Sauvegarde sauvegarde;
 		boolean reussite;
-		
-		toucheC = new ToucheCNormale(this,defenseur);
+
+		toucheC = new ToucheCNormale(this, defenseur);
 		blessure = toucheC.toucherC();
 		sauvegarde = blessure.blesser();
 		reussite = sauvegarde.sauver();
-		if(reussite==false)
+		if (reussite == false)
 			defenseur.pertePv();
 	}
-	
-	public void attaquerT(Unite defenseur){
-		//ATTENTION A FAIRE (en fait je sais pas trop comment gere cette architecture...)
-		//sauvegarde de valeur modifiable pour le combat
-		int pa = this.getArmeT().getPa();
+
+	public void attaquerT(Unite defenseur) {
+		this.save();
+
+		this.getArmeT().attaquerT(this, defenseur);
 		
-		
-		//defenseur vivant??
-		
-		//is able to fire???
-		
-		ToucheT toucheT;
-		Blessure blessure;
-		Sauvegarde sauvegarde;
-		boolean reussite;
-		
-		toucheT = new ToucheTNormale(this,defenseur);
-		blessure = toucheT.toucherT();
-		if(blessure.getClass().toString()!=BlessureInutile.class.toString())
-			this.getArmeT().attaquerT(this, defenseur, blessure);
+		this.reset();
 	}
-	
-	public boolean isDeplace(){
-		//encore un truc a faire quand je ferais les deplacement...
+
+	public boolean isDeplace() {
+		// encore un truc a faire quand je ferais les deplacement...
 		return false;
 	}
-	
+
+	// ********** la memoire de la classe ********
+
+	private int ccs, cts, fs, es, is, as, cds, svgS;
+	private ArmeT armeTs;
+	private ArmeC armeCs;
+
+	public void save() {
+		this.ccs = cc;
+		this.cts = ct;
+		this.fs = f;
+		this.es = e;
+		this.is = i;
+		this.as = a;
+		this.cds = cd;
+		this.svgS = svg;
+		this.armeTs = armeT;
+		this.armeCs = armeC;
+	}
+
+	public void reset() {
+		this.cc = ccs;
+		this.ct = cts;
+		this.f = fs;
+		this.e = es;
+		this.i = is;
+		this.a = as;
+		this.cds = cd;
+		this.svg = svgS;
+		this.armeT = armeTs;
+		this.armeCs = armeC;
+	}
+
 	// *********** les constructeurs ************
-	
+
 	protected Infanterie() {
 		super();
 		this.blAvant = 0;

@@ -6,4 +6,8 @@ public class ArmeTTest extends ArmeT {
 	public ArmeTTest() {
 		super(0, 0, 7, 0);
 	}
+
+	public boolean isAbleToCharge() {
+		return true;
+	}
 }
