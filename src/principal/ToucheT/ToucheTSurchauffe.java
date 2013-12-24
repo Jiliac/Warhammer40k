@@ -20,8 +20,7 @@ public class ToucheTSurchauffe extends ToucheTMere implements ToucheT{
 		//on traite le cas particulier
 		if(jet==1){
 			Sauvegarde sauvegarde = new SauvegardeNormale(new UniteTest(),attaquant);
-			if(sauvegarde.sauver()==false)
-				attaquant.pertePv();
+			sauvegarde.sauver();
 		}
 		
 		// et sinon on traite la variable normalement
