@@ -1,5 +1,7 @@
 package principal;
 
+import java.util.ArrayList;
+
 import principal.Blesse.Blessure;
 import principal.Sauvegarde.Sauvegarde;
 import principal.ToucheC.ToucheC;
@@ -18,6 +20,22 @@ public abstract class Unite {
 	abstract void attaquerC(Unite defenseur);
 	
 	abstract void attaquerT(Unite defenseur);
+	
+	public void attaquerCUT(Troupe troupe){
+		ArrayList<Unite> tr = troupe.getTroupe();
+		for(Unite defenseur : tr){
+			this.attaquerC(defenseur);
+		}
+	}
+	
+	public void attaquerTUT(Troupe troupe){
+		ArrayList<Unite> tr = troupe.getTroupe();
+		for(Unite defenseur : tr){
+			this.attaquerT(defenseur);
+		}
+	}
+	
+	
 	
 	// *********** gestion de la position ***********
 	

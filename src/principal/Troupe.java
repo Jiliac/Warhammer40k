@@ -2,8 +2,8 @@ package principal;
 
 import java.util.ArrayList;
 
-public class Troupe<T extends Unite> {
-	ArrayList<T> troupe;
+public class Troupe {
+	ArrayList<Unite> troupe;
 	int nbMin, nbMax;
 
 	// *********** constructeurs **************
@@ -11,12 +11,12 @@ public class Troupe<T extends Unite> {
 	protected Troupe(int nbMin, int nbMax) {
 		this.nbMin = nbMin;
 		this.nbMax = nbMax;
-		troupe = new ArrayList<T>();
+		troupe = new ArrayList();
 	}
 
 	// *********** ajout d'unite ***************
 
-	public void add(T unite) {
+	public void add(Unite unite) {
 		if (!this.testRempli())
 			troupe.add(unite);
 	}
@@ -29,9 +29,9 @@ public class Troupe<T extends Unite> {
 	}
 
 	public void restructure() {
-		ArrayList<T> tr = this.getTroupe();
+		ArrayList<Unite> tr = this.getTroupe();
 		for (int i = 0; i < tr.size(); i++) {
-			T unite = tr.get(i);
+			Unite unite = tr.get(i);
 			if (unite.getPv() <= 0)
 				tr.remove(unite);
 		}
@@ -44,7 +44,7 @@ public class Troupe<T extends Unite> {
 		String str = "";
 		str += "les points de pv des unites de cette troupe:\n";
 		int i = 1;
-		for (T unite : this.getTroupe()) {
+		for (Unite unite : this.getTroupe()) {
 			int pv = unite.getPv();
 			str += "l'unite " + i + " a " + pv + " de point de vie.\n";
 			i++;
@@ -56,7 +56,7 @@ public class Troupe<T extends Unite> {
 
 	// ************* getters et setters ****************
 
-	public ArrayList<T> getTroupe() {
+	public ArrayList<Unite> getTroupe() {
 		return troupe;
 	}
 
@@ -68,7 +68,7 @@ public class Troupe<T extends Unite> {
 		return nbMax;
 	}
 
-	protected void setTroupe(ArrayList<T> troupe) {
+	protected void setTroupe(ArrayList<Unite> troupe) {
 		this.troupe = troupe;
 	}
 

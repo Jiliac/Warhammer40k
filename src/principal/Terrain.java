@@ -9,19 +9,18 @@ public class Terrain {
 
 	public Terrain() {
 	}
-	
-	//cette méthode est utilisé pour les armes a explosion
-	public ArrayList<Unite> zone(int rayon,int posX,int posY){
+
+	// cette méthode est utilisé pour les armes a explosion
+	public ArrayList<Unite> zone(int posX, int posY, int rayon) {
 		ArrayList<Unite> al = new ArrayList<Unite>();
 		return al;
 	}
-	
-	
-	//cette methode est utilise pour les sauvegardes de couvert
-	public String getTypeTerrain(int posX,int posY){
-		String str=null;
+
+	// cette methode est utilise pour les sauvegardes de couvert
+	public String getTypeTerrain(int posX, int posY) {
+		String str = null;
 		return str;
-		//Classe a preciser evidemment...
-		
+		// Classe a preciser evidemment...
+
 	}
 }
