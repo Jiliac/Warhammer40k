@@ -10,8 +10,12 @@ public class Terrain {
 	public Terrain() {
 	}
 
-	// cette méthode est utilisé pour les armes a explosion
-	public ArrayList<Unite> zone(int posX, int posY, int rayon) {
+	// cette méthode est utilisé pour les armes surfaces
+	public ArrayList<Unite> zoneCercle(int posX, int posY, int rayon) {
+		ArrayList<Unite> al = new ArrayList<Unite>();
+		return al;
+	}
+	public ArrayList<Unite> zoneSouffle(int posX, int posY) {
 		ArrayList<Unite> al = new ArrayList<Unite>();
 		return al;
 	}

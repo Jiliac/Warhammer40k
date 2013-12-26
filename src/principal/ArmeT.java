@@ -14,7 +14,10 @@ import principal.ToucheT.ToucheT;
 import principal.ToucheT.ToucheTNormale;
 import principal.ToucheT.ToucheTSurchauffe;
 import principal.armeT.attaqueT.AttaqueTClassique;
+import principal.armeT.attaqueT.AttaqueTSouffle;
 import principal.armeT.attaqueT.AttaqueTSurface;
+import principal.armeT.attaqueT.ToucheTExplosion;
+import principal.armeT.attaqueT.ToucheTGrandeExplosion;
 
 public abstract class ArmeT {
 	protected boolean used;
@@ -58,46 +61,43 @@ public abstract class ArmeT {
 		this(portee, f, pa, nbTir, "normal", "normal", "normal");
 	}
 
-	// ************* cAttaque de Surface *****************
+	// ************* Attaque de Surface *****************
 
 	public void associationTUT(Unite attaquant, Troupe troupeDef) {
-		if (this.associationAttaqueTSurface(attaquant,troupeDef)==null)
+		if (this.associationAttaqueTSurface(attaquant) == null)
 			attaquant.attaquerTUT(troupeDef);
 		else
-			this.attaqueSurface(attaquant, troupeDef);
+			this.attaqueSurface(attaquant);
 	}
 
-	public void attaqueSurface(Unite attaquant, Troupe troupeDef) {
-		AttaqueTSurface ats; //ATTENTION ARBRE DE DECISION À FAIRE!!!!!!!!!!!!!
-		ats=this.associationAttaqueTSurface(attaquant,troupeDef);
+	public void attaqueSurface(Unite attaquant) {
+		AttaqueTSurface ats;
+		ats = this.associationAttaqueTSurface(attaquant);
 		ArrayList<Blessure> blessures = ats.toucherT();
-		for(Blessure blessure : blessures){
+		for (Blessure blessure : blessures) {
 			Sauvegarde sauvegarde = blessure.blesser();
 			sauvegarde.sauver();
 		}
-		
-		/*
-		 * new methode de surface qui retourne des blessures (il va falloir
-		 * faire un arbre de decision qi retourne quelle attaque de surface,
-		 * mais je peux coder cette methode sans le savoir...) puis
-		 * blessure.blesser() puis sauvegarde.sauver()
-		 */
 	}
-	
-	public AttaqueTSurface associationAttaqueTSurface(Unite attaquant, Troupe troupeDef){
+
+	public AttaqueTSurface associationAttaqueTSurface(Unite attaquant) {
 		AttaqueTSurface retour = null;
-		//probleme pour x et y!!!!!!
-		int x=0,y=0;
-		//a finir
-		if(this.typeToucheT=="explosion")
-			retour = new ToucheTExplosion();
-		else if(this.typeToucheT="grandeExplosion")
-			retour = new ToucheTGrandeExplosion();
-		else if(this.typeToucheT="souffle")
-			retour = new ToucheTSouffle();
+		// en fait c'est le moment où il faudrait demander à l'utilisateur de
+		// décider des position d'attaque
+		int x = 0, y = 0;
+		// a finir
+		if (this.typeToucheT != "") {
+			if (this.typeToucheT == "explosion")
+				retour = new ToucheTExplosion(attaquant, x, y);
+			else if (this.typeToucheT == "grandeExplosion")
+				retour = new ToucheTGrandeExplosion(attaquant, x, y);
+
+			else if (this.typeToucheT == "souffle")
+				retour = new AttaqueTSouffle(attaquant, x, y);
+		}
 		return retour;
 	}
-	
+
 	// ************* constructeurs de combat *****************
 
 	public ToucheT associationToucheT(Unite attaquant, Unite defenseur) {
