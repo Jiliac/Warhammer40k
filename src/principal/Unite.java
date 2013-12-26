@@ -18,50 +18,50 @@ public abstract class Unite {
 	// *********** les actions ************
 
 	abstract void attaquerC(Unite defenseur);
-	
+
 	abstract void attaquerT(Unite defenseur);
-	
-	public void attaquerCUT(Troupe troupe){
+
+	public void attaquerCUT(Troupe troupe) {
 		ArrayList<Unite> tr = troupe.getTroupe();
-		for(Unite defenseur : tr){
+		for (Unite defenseur : tr) {
 			this.attaquerC(defenseur);
 		}
 	}
-	
-	public void attaquerTUT(Troupe troupe){
+
+	public void attaquerTUT(Troupe troupe) {
 		ArrayList<Unite> tr = troupe.getTroupe();
-		for(Unite defenseur : tr){
+		for (Unite defenseur : tr) {
 			this.attaquerT(defenseur);
 		}
 	}
-	
-	
-	
+
 	// *********** gestion de la position ***********
-	
+
 	public abstract boolean isDeplace();
-	
-	public double Distance(Unite attaquant,Unite defenseur){
-		int posXA,posYA,posXD,posYD;
-		posXA=attaquant.getPosX();
-		posYA=attaquant.getPosY();
-		posXD=defenseur.getPosX();
-		posYD=defenseur.getPosY();
-		double distance=Math.sqrt((posXA-posXD)*(posXA-posXD)+(posYA-posYD)*(posYA-posYD));
+
+	public double Distance(Unite attaquant, Unite defenseur) {
+		int posXA, posYA, posXD, posYD;
+		posXA = attaquant.getPosX();
+		posYA = attaquant.getPosY();
+		posXD = defenseur.getPosX();
+		posYD = defenseur.getPosY();
+		double distance = Math.sqrt((posXA - posXD) * (posXA - posXD)
+				+ (posYA - posYD) * (posYA - posYD));
 		return distance;
 	}
-	public double Distance(Unite defenseur){
-		return this.Distance(this,defenseur);
-	}
-	public boolean aPorte(int portee, Unite defenseur){
-		boolean retour;
-		if(this.Distance(defenseur)<=portee)
-			retour=true;
-		else
-			retour=false;
-		return retour;
+
+	public double Distance(Unite defenseur) {
+		return this.Distance(this, defenseur);
 	}
 
+	public boolean aPorte(int portee, Unite defenseur) {
+		boolean retour;
+		if (this.Distance(defenseur) <= portee)
+			retour = true;
+		else
+			retour = false;
+		return retour;
+	}
 
 	// ************ constructeur ********************
 	public Unite() {
@@ -82,7 +82,8 @@ public abstract class Unite {
 	// **************** visualisation ********************
 	public String toString() {
 		String str;
-		str = "je suis un "+this.getClass().toString()+" j'ai " + this.getPv() + " points de vie.";
+		str = "je suis un " + this.getClass().toString() + " j'ai "
+				+ this.getPv() + " points de vie.";
 		return str;
 	}
 
@@ -150,8 +151,8 @@ public abstract class Unite {
 	public int getPosY() {
 		return posY;
 	}
-	
-	public void setArmeT(ArmeT arme){
-		this.armeT=arme;
+
+	public void setArmeT(ArmeT arme) {
+		this.armeT = arme;
 	}
 }

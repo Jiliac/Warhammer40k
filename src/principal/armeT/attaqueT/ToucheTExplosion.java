@@ -1,8 +1,8 @@
-package principal.ToucheT;
+package principal.armeT.attaqueT;
 
 import principal.Unite;
 
-public class ToucheTExplosion extends ToucheTExplosionMere{
+public class ToucheTExplosion extends ToucheTExplosionMere implements AttaqueTSurface{
 
 	public ToucheTExplosion(Unite defenseur, int x, int y) {
 		super(defenseur, x, y, 3);

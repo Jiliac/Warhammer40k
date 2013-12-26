@@ -6,6 +6,20 @@ public class Troupe {
 	ArrayList<Unite> troupe;
 	int nbMin, nbMax;
 
+	// ************* actions *****************
+
+	public void attaquerCTT(Troupe troupeDef) {
+		ArrayList<Unite> at = this.getTroupe();
+		for (Unite attaquant : at)
+			attaquant.attaquerCUT(troupeDef);
+	}
+
+	public void attaquerTTT(Troupe troupeDef) {
+		ArrayList<Unite> at = this.getTroupe();
+		for (Unite attaquant : at)
+			attaquant.attaquerTUT(troupeDef);
+	}
+
 	// *********** constructeurs **************
 
 	protected Troupe(int nbMin, int nbMax) {
@@ -37,9 +51,9 @@ public class Troupe {
 		}
 		this.setTroupe(tr);
 	}
-	
+
 	// *********** visualisation ********************+
-	
+
 	public String toString() {
 		String str = "";
 		str += "les points de pv des unites de cette troupe:\n";
