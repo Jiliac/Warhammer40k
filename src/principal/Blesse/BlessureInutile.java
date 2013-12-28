@@ -1,12 +1,13 @@
 package principal.Blesse;
 
+import principal.Infanterie;
 import principal.Unite;
 import principal.Sauvegarde.Sauvegarde;
 import principal.Sauvegarde.SauvegardeInutile;
 
 public class BlessureInutile extends BlessureMere implements Blessure{
 
-	public BlessureInutile(Unite attaquant, Unite defenseur) {
+	public BlessureInutile(Unite attaquant, Infanterie defenseur) {
 		super(attaquant, defenseur);
 		// TODO Auto-generated constructor stub
 	}

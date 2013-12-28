@@ -6,8 +6,10 @@ import principal.Sauvegarde.SauvegardeNormale;
 import de.De6;
 
 public class BlessureSniper extends BlessureMere implements Blessure {
+	private Unite defenseur;
 	public BlessureSniper(Unite attaquant, Unite defenseur) {
-		super(attaquant, defenseur);
+		super(attaquant, null);
+		this.defenseur=defenseur;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -15,6 +17,8 @@ public class BlessureSniper extends BlessureMere implements Blessure {
 		De6 de = new De6();
 		int jet = de.jet();
 		Sauvegarde retour;
+		
+		// idem que pour blessure perforante...
 		if (jet == 6) {
 			Unite at = attaquant;
 			attaquant.getArmeT().setPa(2);

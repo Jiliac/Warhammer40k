@@ -2,6 +2,7 @@ package principal.Blesse;
 
 import de.De;
 import de.De6;
+import principal.Infanterie;
 import principal.Unite;
 import principal.Sauvegarde.Sauvegarde;
 import principal.Sauvegarde.SauvegardeInutile;
@@ -11,13 +12,13 @@ public class BlessureNormale extends BlessureMere implements Blessure {
 	private int f, e;
 	private int jet = -1;
 
-	public BlessureNormale(Unite attaquant, Unite defenseur) {
+	public BlessureNormale(Unite attaquant, Infanterie defenseur) {
 		super(attaquant, defenseur);
 		this.f = attaquant.getF();
 		this.e = defenseur.getE();
 	}
 
-	public BlessureNormale(Unite attaquant, Unite defenseur, int jet) {
+	public BlessureNormale(Unite attaquant, Infanterie defenseur, int jet) {
 		this(attaquant, defenseur);
 		this.jet = jet;
 	}

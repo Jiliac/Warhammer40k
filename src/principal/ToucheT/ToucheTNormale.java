@@ -23,6 +23,7 @@ public class ToucheTNormale extends ToucheTMere implements ToucheT{
 		if(jet==-1)
 			jet=de.jet();
 		if (ct < 6) {
+			//considere les cas vehicule et infanterie...
 			if (jet >= (7 - ct))
 				retour = new BlessureNormale(attaquant, defenseur);
 			else

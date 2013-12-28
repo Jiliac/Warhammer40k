@@ -1,10 +1,10 @@
 package principal.ToucheC;
 
-import principal.Unite;
+import principal.Infanterie;
 
 public class ToucheCMere {
-	Unite attaquant,defenseur;
-	public ToucheCMere(Unite attaquant,Unite defenseur){
+	Infanterie attaquant,defenseur;
+	public ToucheCMere(Infanterie attaquant,Infanterie defenseur){
 		this.attaquant=attaquant;
 		this.defenseur=defenseur;
 	}

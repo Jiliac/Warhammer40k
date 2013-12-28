@@ -1,10 +1,12 @@
 package principal.Blesse;
 
+import principal.Infanterie;
 import principal.Unite;
 
 public class BlessureMere {
-	Unite attaquant,defenseur;
-	public BlessureMere(Unite attaquant,Unite defenseur){
+	protected Unite attaquant;
+	protected Infanterie defenseur;
+	public BlessureMere(Unite attaquant,Infanterie defenseur){
 		this.attaquant=attaquant;
 		this.defenseur=defenseur;
 	}
