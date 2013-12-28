@@ -10,37 +10,49 @@ public abstract class Unite {
 
 	// ***************** les actions ****************
 
-	abstract void attaquerC(Infanterie defenseur);
+	public abstract void attaquerC(Infanterie defenseur);
 
-	abstract void attaquerT(Infanterie defenseur);
+	public abstract void attaquerT(Infanterie defenseur);
 
-	abstract void attaquerC(Vehicule defenseur);
+	public abstract void attaquerC(Vehicule defenseur);
 
-	abstract void attaquerT(Vehicule defenseur);
+	public abstract void attaquerT(Vehicule defenseur);
 
+/*     - - - - - - - - - - - - - - - - - - - - - - - -    */
+	
+	public void attaquerC(Unite defenseur) {
+		if (defenseur instanceof Infanterie) {
+			Infanterie def = (Infanterie) defenseur;
+			this.attaquerC(def);
+		} else if (defenseur instanceof Vehicule) {
+			Vehicule def = (Vehicule) defenseur;
+			this.attaquerC(def);
+		}
+	}
+
+	public void attaquerT(Unite defenseur) {
+		if (defenseur instanceof Infanterie) {
+			Infanterie def = (Infanterie) defenseur;
+			this.attaquerT(def);
+		} else if (defenseur instanceof Vehicule) {
+			Vehicule def = (Vehicule) defenseur;
+			this.attaquerT(def);
+		}
+	}
+	
+/*     - - - - - - - - - - - - - - - - - - - - - - - -    */
+	
 	public void attaquerCUT(Troupe troupe) {
 		ArrayList<Unite> tr = troupe.getTroupe();
 		for (Unite defenseur : tr) {
-			if (defenseur instanceof Infanterie) {
-				Infanterie def = (Infanterie) defenseur;
-				this.attaquerC(def);
-			} else if (defenseur instanceof Vehicule) {
-				Vehicule def = (Vehicule) defenseur;
-				this.attaquerC(def);
-			}
+			this.attaquerC(defenseur);
 		}
 	}
 
 	public void attaquerTUT(Troupe troupe) {
 		ArrayList<Unite> tr = troupe.getTroupe();
 		for (Unite defenseur : tr) {
-			if (defenseur instanceof Infanterie) {
-				Infanterie def = (Infanterie) defenseur;
-				this.attaquerT(def);
-			} else if (defenseur instanceof Vehicule) {
-				Vehicule def = (Vehicule) defenseur;
-				this.attaquerT(def);
-			}
+			this.attaquerT(defenseur);
 		}
 	}
 

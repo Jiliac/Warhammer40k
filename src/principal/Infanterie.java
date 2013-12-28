@@ -30,6 +30,21 @@ public class Infanterie extends Unite {
 		this.reset();
 	}
 
+	public void attaquerC(Vehicule defenseur) {
+		this.save();
+
+		this.getArmeC().attaquerC(this, defenseur);
+
+		this.reset();
+	}	
+
+	public void attaquerT(Vehicule defenseur) {
+		this.save();
+
+		this.getArmeT().attaquerT(this, defenseur);
+
+		this.reset();
+	}	
 
 	// ********** la memoire de la classe ********
 
@@ -89,16 +104,18 @@ public class Infanterie extends Unite {
 		this.cd = cd;
 		this.svg = svg;
 	}
-	
-	// ************* getters  ************
-	
+
+	// ************* getters ************
+
 	public ArmeC getArmeC() {
 		return armeC;
 	}
+
 	public ArmeT getArmeT() {
 		return armeT;
 	}
-	public void setArmeT(ArmeT armeT){
-		this.armeT=armeT;
+
+	public void setArmeT(ArmeT armeT) {
+		this.armeT = armeT;
 	}
 }

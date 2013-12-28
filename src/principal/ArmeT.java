@@ -1,7 +1,6 @@
 package principal;
 
 import java.util.ArrayList;
-
 import principal.Blesse.Blessure;
 import principal.Blesse.BlessureNormale;
 import principal.Blesse.BlessurePerforante;
@@ -13,15 +12,15 @@ import principal.ToucheT.ToucheT;
 import principal.ToucheT.ToucheTNormale;
 import principal.ToucheT.ToucheTSurchauffe;
 import principal.armeT.attaqueT.AttaqueT;
-import principal.armeT.attaqueT.AttaqueTClassique;
 import principal.armeT.attaqueT.AttaqueTSouffle;
 import principal.armeT.attaqueT.AttaqueTSurface;
 import principal.armeT.attaqueT.ToucheTExplosion;
 import principal.armeT.attaqueT.ToucheTGrandeExplosion;
-import principal.vehicule.AttaqueTVehicule;
+import principal.vehicule.EffetDegat;
+import principal.vehicule.Penetration;
+import principal.vehicule.PenetrationBlindage;
 
 public abstract class ArmeT {
-	protected boolean utilisable = true;
 	protected boolean used;
 	protected int portee;
 	protected int f;
@@ -30,7 +29,7 @@ public abstract class ArmeT {
 
 	// ******************* les trois phases *******************
 
-	protected boolean toucherT(Unite attaquant, Infanterie defenseur) {
+	protected boolean toucherT(Unite attaquant, Unite defenseur) {
 		ToucheT tt = new ToucheTNormale(attaquant, defenseur);
 		return tt.toucherT();
 	}
@@ -44,24 +43,82 @@ public abstract class ArmeT {
 		Sauvegarde sauv = new SauvegardeNormale(attaquant, defenseur);
 		sauv.sauver();
 	}
-
+	
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
+	
+	protected Penetration pen;
+	
+	protected boolean blesser(Infanterie attaquant, Vehicule defenseur){
+		PenetrationBlindage bls = new PenetrationBlindage(attaquant,defenseur);
+		pen = bls;
+		return bls.blesser();
+	}
+	
+	protected boolean blesser(Vehicule attaquant, Vehicule defenseur){
+		PenetrationBlindage bls = new PenetrationBlindage(attaquant,defenseur,this);
+		pen = bls;
+		return bls.blesser();
+	}
+	
+	protected boolean blesser(Unite attaquant, Vehicule defenseur){
+		boolean retour = false;
+		if(attaquant instanceof Infanterie){
+			Infanterie at = (Infanterie) attaquant;
+			retour = this.blesser(at, defenseur);
+		}
+		else if(attaquant instanceof Vehicule){
+			Vehicule at = (Vehicule) attaquant;
+			retour = this.blesser(at, defenseur);
+		}
+		return retour;
+	}
+	
+	protected void sauver(Vehicule defenseur){
+		Sauvegarde sauvegarde = new EffetDegat(defenseur,this.pen);
+		sauvegarde.sauver();
+	}
+	
 	// ********************* les actions **********************
 
 	public abstract boolean isAbleToCharge();
 
 	public boolean aPorte(Unite attaquant, Unite defenseur) {
-		return attaquant.aPorte(portee, defenseur);
+		return attaquant.aPorte(this.portee, defenseur);
 	}
-
+	
 	public void attaquerT(Unite attaquant, Infanterie defenseur) {
-		if (this.toucherT(attaquant, defenseur)) {
-			if (this.blesser(attaquant, defenseur))
-				this.sauver(attaquant, defenseur);
+		if (this.aPorte(attaquant, defenseur)) {
+			if (this.toucherT(attaquant, defenseur)) {
+				if (this.blesser(attaquant, defenseur))
+					this.sauver(attaquant, defenseur);
+			}
+		}
+	}
+	
+	public void attaquerT(Unite attaquant, Vehicule defenseur){
+		if(this.aPorte(attaquant, defenseur)){
+			if (this.toucherT(attaquant, defenseur)) {
+				if (this.blesser(attaquant, defenseur))
+					this.sauver(defenseur);
+			}
 		}
 	}
 
 	public void attaquerTUT(Unite attaquant, Troupe troupeDef) {
 		this.associationTUT(attaquant, troupeDef);
+	}
+	
+/*  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+	
+	public void attaquerT(Unite attaquant, Unite defenseur){
+		if(attaquant instanceof Infanterie){
+			Infanterie at = (Infanterie) attaquant;
+			this.attaquerT(at, defenseur);
+		}
+		else if(attaquant instanceof Vehicule){
+			Vehicule at = (Vehicule) attaquant;
+			this.attaquerT(at, defenseur);
+		}
 	}
 
 	// ********************* constructeur **********************
@@ -110,14 +167,6 @@ public abstract class ArmeT {
 	}
 
 	// ******************** getters et setters ***************
-
-	public boolean isUtilisable() {
-		return utilisable;
-	}
-
-	public void setUtilisable(boolean utilisable) {
-		this.utilisable = utilisable;
-	}
 
 	public int getPortee() {
 		return portee;

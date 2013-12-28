@@ -1,18 +1,15 @@
 package principal.armeT;
 
 import principal.ArmeT;
+import principal.Infanterie;
 import principal.Unite;
-import principal.Blesse.Blessure;
-import principal.Sauvegarde.Sauvegarde;
-import principal.ToucheT.ToucheT;
-import principal.armeT.attaqueT.AttaqueTClassique;
 
 public class ArmeTirRapide extends ArmeT {
 	protected ArmeTirRapide(int portee, int f, int pa) {
 		super(portee, f, pa, 1);
 	}
 
-	public void attaquerT(Unite attaquant, Unite defenseur) {
+	public void attaquerT(Unite attaquant, Infanterie defenseur) {
 		// defini le comportement d'une arme de TirRapide
 		if (attaquant.aPorte(12, defenseur)) {
 			this.portee = 12;
@@ -21,9 +18,10 @@ public class ArmeTirRapide extends ArmeT {
 				|| attaquant.isDeplace() == true)
 			return;
 		
-		AttaqueTClassique atc = new AttaqueTClassique(attaquant,defenseur,this);
-		atc.attaquerT();
-
+		if (this.toucherT(attaquant, defenseur)) {
+			if (this.blesser(attaquant, defenseur))
+				this.sauver(attaquant, defenseur);
+		}
 	}
 
 	public boolean isAbleToCharge() {

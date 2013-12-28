@@ -12,8 +12,9 @@ public class Vehicule extends Unite {
 	
 	public void attaquerT(Unite defenseur){
 		if(this.etatMouvement=="immobile"){
-			for(ArmeT armeT : armes)
+			for(ArmeT armeT : armes){
 				armeT.attaquerT(this, defenseur);
+			}
 		}
 		else if(this.etatMouvement=="combat"){
 			this.choisirArme(); //ATTENTION A DEFINIR
@@ -24,10 +25,6 @@ public class Vehicule extends Unite {
 					arme.setUtilisable(false);
 			}
 		}
-		else if(this.etatMouvement=="manoeuvre"){
-			for(ArmeT arme : armes){
-				arme.setUtilisable(false);
-			}
 		}
 	}
 	
