@@ -49,7 +49,7 @@ public class Vehicule extends Unite {
 		
 	}
 	
-	public void immobilisé(){
+	public void immobilise(){
 		
 	}
 	

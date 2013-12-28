@@ -11,6 +11,12 @@ public class BlessureFausse extends BlessureMere implements Blessure{
 		super(attaquant, defenseur);
 		// TODO Auto-generated constructor stub
 	}
+	public BlessureFausse(Unite attaquant, Unite defenseur){
+		super(null,null);
+	}
+	public BlessureFausse(){
+		super(null,null);
+	}
 	
 	public Sauvegarde blesser(){
 		Sauvegarde sf = new SauvegardeFausse(null,null);

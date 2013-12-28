@@ -17,9 +17,9 @@ import principal.armeT.attaqueT.AttaqueT;
 import principal.armeT.attaqueT.AttaqueTClassique;
 import principal.armeT.attaqueT.AttaqueTSouffle;
 import principal.armeT.attaqueT.AttaqueTSurface;
-import principal.armeT.attaqueT.AttaqueTVehicule;
 import principal.armeT.attaqueT.ToucheTExplosion;
 import principal.armeT.attaqueT.ToucheTGrandeExplosion;
+import principal.vehicule.AttaqueTVehicule;
 
 public abstract class ArmeT {
 	protected boolean utilisable = true;
@@ -45,7 +45,7 @@ public abstract class ArmeT {
 			at = new AttaqueTClassique(attaquant, def, this);
 		} else if (defenseur instanceof Vehicule) {
 			Vehicule def = (Vehicule) defenseur;
-			at = new AttaqueTVehicule(attaquant, def, this);
+			// en fait il va falloir un autre type de truc...
 		}
 
 		if (this.utilisable == true)
