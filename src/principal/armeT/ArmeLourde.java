@@ -1,6 +1,7 @@
 package principal.armeT;
 
 import principal.ArmeT;
+import principal.Infanterie;
 import principal.Unite;
 import principal.Blesse.Blessure;
 import principal.Sauvegarde.Sauvegarde;
@@ -14,13 +15,16 @@ public class ArmeLourde extends ArmeT {
 	}
 
 	public void attaquerT(Unite attaquant, Unite defenseur) {
-		//comportement d'une armeLourde
-		if (attaquant.isDeplace() == true)
+		// comportement d'une armeLourde
+		if (attaquant instanceof Infanterie)
+			this.utilisable = !attaquant.isDeplace();
+		if (this.utilisable == false)
 			return;
 		else
 			used = true;
 
-		AttaqueTClassique atc = new AttaqueTClassique(attaquant,defenseur,this);
+		AttaqueTClassique atc = new AttaqueTClassique(attaquant, defenseur,
+				this);
 		atc.attaquerT();
 	}
 

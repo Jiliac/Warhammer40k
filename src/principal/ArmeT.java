@@ -13,13 +13,16 @@ import principal.Sauvegarde.SauvegardeNormale;
 import principal.ToucheT.ToucheT;
 import principal.ToucheT.ToucheTNormale;
 import principal.ToucheT.ToucheTSurchauffe;
+import principal.armeT.attaqueT.AttaqueT;
 import principal.armeT.attaqueT.AttaqueTClassique;
 import principal.armeT.attaqueT.AttaqueTSouffle;
 import principal.armeT.attaqueT.AttaqueTSurface;
+import principal.armeT.attaqueT.AttaqueTVehicule;
 import principal.armeT.attaqueT.ToucheTExplosion;
 import principal.armeT.attaqueT.ToucheTGrandeExplosion;
 
 public abstract class ArmeT {
+	protected boolean utilisable = true;
 	protected boolean used;
 	protected int portee;
 	protected int f;
@@ -36,9 +39,17 @@ public abstract class ArmeT {
 	}
 
 	public void attaquerT(Unite attaquant, Unite defenseur) {
-		AttaqueTClassique atc = new AttaqueTClassique(attaquant, defenseur,
-				this);
-		atc.attaquerT();
+		AttaqueT at=null;
+		if (defenseur instanceof Infanterie) {
+			Infanterie def = (Infanterie) defenseur;
+			at = new AttaqueTClassique(attaquant, def, this);
+		} else if (defenseur instanceof Vehicule) {
+			Vehicule def = (Vehicule) defenseur;
+			at = new AttaqueTVehicule(attaquant, def, this);
+		}
+
+		if (this.utilisable == true)
+			at.attaquerT();
 	}
 
 	public void attaquerTUT(Unite attaquant, Troupe troupeDef) {
@@ -139,6 +150,14 @@ public abstract class ArmeT {
 	}
 
 	// ******************** getters et setters ***************
+
+	public boolean isUtilisable() {
+		return utilisable;
+	}
+
+	public void setUtilisable(boolean utilisable) {
+		this.utilisable = utilisable;
+	}
 
 	public int getPortee() {
 		return portee;

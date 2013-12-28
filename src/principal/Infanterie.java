@@ -1,5 +1,6 @@
 package principal;
 
+import classesDeTest.ArmeTTest;
 import principal.Blesse.Blessure;
 import principal.Blesse.BlessureInutile;
 import principal.Sauvegarde.Sauvegarde;
@@ -9,14 +10,16 @@ import principal.ToucheT.ToucheT;
 import principal.ToucheT.ToucheTNormale;
 
 public class Infanterie extends Unite {
+	protected ArmeC armeC;
+	protected ArmeT armeT;
 
 	// ******** les actions *****************
 
 	public void attaquerC(Unite defenseur) {
 		this.save();
-		
-		this.armeC.attaquerC(this,defenseur);
-		
+
+		this.armeC.attaquerC(this, defenseur);
+
 		this.reset();
 	}
 
@@ -24,19 +27,16 @@ public class Infanterie extends Unite {
 		this.save();
 
 		this.getArmeT().attaquerT(this, defenseur);
-		
+
 		this.reset();
 	}
 
-	public boolean isDeplace() {
-		// encore un truc a faire quand je ferais les deplacement...
-		return false;
-	}
 
 	// ********** la memoire de la classe ********
 
-	// ATTENTION ces deux methodes s'appellent respectivement au debut et a la fin des methodes de combat!!!
-	
+	// ATTENTION ces deux methodes s'appellent respectivement au debut et a la
+	// fin des methodes de combat!!!
+
 	private int ccs, cts, fs, es, is, as, cds, svgS;
 	private ArmeT armeTs;
 	private ArmeC armeCs;
@@ -70,7 +70,8 @@ public class Infanterie extends Unite {
 	// *********** les constructeurs ************
 
 	protected Infanterie() {
-		super();
+		this.armeT = new ArmeTTest();
+		this.armeC = new ArmeCTest();
 		this.blAvant = 0;
 		this.blFlanc = 0;
 		this.blArriere = 0;
@@ -88,5 +89,17 @@ public class Infanterie extends Unite {
 		this.a = a;
 		this.cd = cd;
 		this.svg = svg;
+	}
+	
+	// ************* getters  ************
+	
+	public ArmeC getArmeC() {
+		return armeC;
+	}
+	public ArmeT getArmeT() {
+		return armeT;
+	}
+	public void setArmeT(ArmeT armeT){
+		this.armeT=armeT;
 	}
 }

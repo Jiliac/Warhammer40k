@@ -1,13 +1,14 @@
 package principal.armeT.attaqueT;
 
 import principal.ArmeT;
+import principal.Infanterie;
 import principal.Unite;
 import principal.Blesse.Blessure;
 import principal.Sauvegarde.Sauvegarde;
 import principal.ToucheT.ToucheT;
 
 public class AttaqueTClassique extends AttaqueTMere implements AttaqueT {
-	public AttaqueTClassique(Unite attaquant, Unite defenseur, ArmeT armeT) {
+	public AttaqueTClassique(Unite attaquant, Infanterie defenseur, ArmeT armeT) {
 		super(attaquant, defenseur, armeT);
 		// TODO Auto-generated constructor stub
 	}

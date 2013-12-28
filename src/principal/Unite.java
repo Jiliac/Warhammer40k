@@ -9,11 +9,10 @@ import principal.ToucheC.ToucheCNormale;
 import classesDeTest.ArmeTTest;
 
 public abstract class Unite {
-	protected ArmeT armeT;
-	protected ArmeC armeC;
 	protected int cc, ct, f, e, pv, i, a, cd, svg;
 	protected int blAvant, blFlanc, blArriere;
 	protected int posX = 0, posY = 0;
+	protected ArrayList<ArmeT> armes = new ArrayList<ArmeT>();
 
 	// *********** les actions ************
 
@@ -37,8 +36,12 @@ public abstract class Unite {
 
 	// *********** gestion de la position ***********
 
-	public abstract boolean isDeplace();
 
+	public boolean isDeplace() {
+		// encore un truc a faire quand je ferais les deplacement...
+		return false;
+	}
+	
 	public double Distance(Unite attaquant, Unite defenseur) {
 		int posXA, posYA, posXD, posYD;
 		posXA = attaquant.getPosX();
@@ -63,12 +66,6 @@ public abstract class Unite {
 		return retour;
 	}
 
-	// ************ constructeur ********************
-	public Unite() {
-		this.armeT = new ArmeTTest();
-		this.armeC = new ArmeCTest();
-	}
-
 	// ************ les points de vie ******************
 
 	public void pertePv(int i) {
@@ -88,12 +85,16 @@ public abstract class Unite {
 	}
 
 	// *********** les getters et setters **************
+
 	public ArmeT getArmeT() {
-		return armeT;
+		return armes.get(0);
 	}
 
-	public ArmeC getArmeC() {
-		return armeC;
+	public void setArmeT(ArmeT arme) {
+		if (armes.size() == 0)
+			armes.add(arme);
+		else
+			armes.add(0, arme);
 	}
 
 	public int getCc() {
@@ -150,9 +151,5 @@ public abstract class Unite {
 
 	public int getPosY() {
 		return posY;
-	}
-
-	public void setArmeT(ArmeT arme) {
-		this.armeT = arme;
 	}
 }
