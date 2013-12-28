@@ -2,46 +2,55 @@ package principal;
 
 import java.util.ArrayList;
 
-import principal.Blesse.Blessure;
-import principal.Sauvegarde.Sauvegarde;
-import principal.ToucheC.ToucheC;
-import principal.ToucheC.ToucheCNormale;
-import classesDeTest.ArmeTTest;
-
 public abstract class Unite {
 	protected int cc, ct, f, e, pv, i, a, cd, svg;
 	protected int blAvant, blFlanc, blArriere;
 	protected int posX = 0, posY = 0;
 	protected ArrayList<ArmeT> armes = new ArrayList<ArmeT>();
 
-	// *********** les actions ************
+	// ***************** les actions ****************
 
-	abstract void attaquerC(Unite defenseur);
+	abstract void attaquerC(Infanterie defenseur);
 
-	abstract void attaquerT(Unite defenseur);
+	abstract void attaquerT(Infanterie defenseur);
+
+	abstract void attaquerC(Vehicule defenseur);
+
+	abstract void attaquerT(Vehicule defenseur);
 
 	public void attaquerCUT(Troupe troupe) {
 		ArrayList<Unite> tr = troupe.getTroupe();
 		for (Unite defenseur : tr) {
-			this.attaquerC(defenseur);
+			if (defenseur instanceof Infanterie) {
+				Infanterie def = (Infanterie) defenseur;
+				this.attaquerC(def);
+			} else if (defenseur instanceof Vehicule) {
+				Vehicule def = (Vehicule) defenseur;
+				this.attaquerC(def);
+			}
 		}
 	}
 
 	public void attaquerTUT(Troupe troupe) {
 		ArrayList<Unite> tr = troupe.getTroupe();
 		for (Unite defenseur : tr) {
-			this.attaquerT(defenseur);
+			if (defenseur instanceof Infanterie) {
+				Infanterie def = (Infanterie) defenseur;
+				this.attaquerT(def);
+			} else if (defenseur instanceof Vehicule) {
+				Vehicule def = (Vehicule) defenseur;
+				this.attaquerT(def);
+			}
 		}
 	}
 
 	// *********** gestion de la position ***********
 
-
 	public boolean isDeplace() {
 		// encore un truc a faire quand je ferais les deplacement...
 		return false;
 	}
-	
+
 	public double Distance(Unite attaquant, Unite defenseur) {
 		int posXA, posYA, posXD, posYD;
 		posXA = attaquant.getPosX();

@@ -1,34 +1,28 @@
 package principal.Blesse;
 
+import principal.Infanterie;
 import principal.Unite;
-import principal.Sauvegarde.Sauvegarde;
-import principal.Sauvegarde.SauvegardeNormale;
 import de.De6;
 
 public class BlessureSniper extends BlessureMere implements Blessure {
-	private Unite defenseur;
-	public BlessureSniper(Unite attaquant, Unite defenseur) {
-		super(attaquant, null);
-		this.defenseur=defenseur;
+	public BlessureSniper(Unite attaquant, Infanterie defenseur) {
+		super(attaquant, defenseur);
 		// TODO Auto-generated constructor stub
 	}
 
-	public Sauvegarde blesser() {
+	public boolean blesser() {
 		De6 de = new De6();
 		int jet = de.jet();
-		Sauvegarde retour;
+		boolean retour;
 		
 		// idem que pour blessure perforante...
 		if (jet == 6) {
-			Unite at = attaquant;
 			attaquant.getArmeT().setPa(2);
-			retour = new SauvegardeNormale(at, defenseur);
+			retour = true;
 		} else if (jet >= 4)
-			retour = new SauvegardeNormale(attaquant, defenseur);
+			retour = true;
 		else {
-			BlessureNormale blessure = new BlessureNormale(attaquant,
-					defenseur, jet);
-			retour = blessure.blesser();
+			retour = false;
 		}
 		return retour;
 	}

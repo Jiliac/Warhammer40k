@@ -4,7 +4,6 @@ import de.De;
 import de.De6;
 import principal.Infanterie;
 import principal.Unite;
-import principal.UniteTest;
 import principal.Sauvegarde.Sauvegarde;
 
 public class SauvegardeNormale extends SauvegardeMere implements Sauvegarde {

@@ -2,7 +2,6 @@ package principal;
 
 import classesDeTest.ArmeTTest;
 import principal.Blesse.Blessure;
-import principal.Blesse.BlessureInutile;
 import principal.Sauvegarde.Sauvegarde;
 import principal.ToucheC.ToucheC;
 import principal.ToucheC.ToucheCNormale;
@@ -15,7 +14,7 @@ public class Infanterie extends Unite {
 
 	// ******** les actions *****************
 
-	public void attaquerC(Unite defenseur) {
+	public void attaquerC(Infanterie defenseur) {
 		this.save();
 
 		this.armeC.attaquerC(this, defenseur);
@@ -23,7 +22,7 @@ public class Infanterie extends Unite {
 		this.reset();
 	}
 
-	public void attaquerT(Unite defenseur) {
+	public void attaquerT(Infanterie defenseur) {
 		this.save();
 
 		this.getArmeT().attaquerT(this, defenseur);

@@ -1,9 +1,6 @@
 package principal.ToucheT;
 
 import principal.Unite;
-import principal.Blesse.Blessure;
-import principal.Blesse.BlessureFausse;
-import principal.Blesse.BlessureNormale;
 import de.De;
 import de.De6;
 
@@ -17,25 +14,25 @@ public class ToucheTNormale extends ToucheTMere implements ToucheT{
 		this.jet=jet;
 	}
 
-	public Blessure toucherT() {
-		Blessure retour;
+	public boolean toucherT() {
+		boolean retour;
 		De de = new De6();
 		if(jet==-1)
 			jet=de.jet();
 		if (ct < 6) {
 			//considere les cas vehicule et infanterie...
 			if (jet >= (7 - ct))
-				retour = new BlessureNormale(attaquant, defenseur);
+				retour = true;
 			else
-				retour = new BlessureFausse(attaquant, defenseur);
+				retour = false;
 		} else {
 			if (jet >= 2)
-				retour = new BlessureNormale(attaquant, defenseur);
+				retour = true;
 			else {
 				if (jet >= 12 - ct)
-					retour = new BlessureNormale(attaquant, defenseur);
+					retour = true;
 				else
-					retour = new BlessureFausse(attaquant, defenseur);
+					retour = false;
 			}
 		}
 		return retour;

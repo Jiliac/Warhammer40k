@@ -3,7 +3,6 @@ package principal;
 import java.util.ArrayList;
 
 import principal.Blesse.Blessure;
-import principal.Blesse.BlessureInutile;
 import principal.Blesse.BlessureNormale;
 import principal.Blesse.BlessurePerforante;
 import principal.Blesse.BlessureSniper;
@@ -28,7 +27,23 @@ public abstract class ArmeT {
 	protected int f;
 	protected int pa;
 	protected int nbTir;
-	protected String typeToucheT, typeBlessure, typeSauvegarde;
+
+	// ******************* les trois phases *******************
+
+	protected boolean toucherT(Unite attaquant, Infanterie defenseur) {
+		ToucheT tt = new ToucheTNormale(attaquant, defenseur);
+		return tt.toucherT();
+	}
+
+	protected boolean blesser(Unite attaquant, Infanterie defenseur) {
+		Blessure bls = new BlessureNormale(attaquant, defenseur);
+		return bls.blesser();
+	}
+
+	protected void sauver(Unite attaquant, Infanterie defenseur) {
+		Sauvegarde sauv = new SauvegardeNormale(attaquant, defenseur);
+		sauv.sauver();
+	}
 
 	// ********************* les actions **********************
 
@@ -38,18 +53,11 @@ public abstract class ArmeT {
 		return attaquant.aPorte(portee, defenseur);
 	}
 
-	public void attaquerT(Unite attaquant, Unite defenseur) {
-		AttaqueT at=null;
-		if (defenseur instanceof Infanterie) {
-			Infanterie def = (Infanterie) defenseur;
-			at = new AttaqueTClassique(attaquant, def, this);
-		} else if (defenseur instanceof Vehicule) {
-			Vehicule def = (Vehicule) defenseur;
-			// en fait il va falloir un autre type de truc...
+	public void attaquerT(Unite attaquant, Infanterie defenseur) {
+		if (this.toucherT(attaquant, defenseur)) {
+			if (this.blesser(attaquant, defenseur))
+				this.sauver(attaquant, defenseur);
 		}
-
-		if (this.utilisable == true)
-			at.attaquerT();
 	}
 
 	public void attaquerTUT(Unite attaquant, Troupe troupeDef) {
@@ -57,23 +65,15 @@ public abstract class ArmeT {
 	}
 
 	// ********************* constructeur **********************
-	protected ArmeT(int portee, int f, int pa, int nbTir, String toucheT,
-			String blessure, String sauvegarde) {
+	protected ArmeT(int portee, int f, int pa, int nbTir) {
 		this.portee = portee;
 		this.f = f;
 		this.pa = pa;
 		this.nbTir = nbTir;
-		this.typeToucheT = toucheT;
-		this.typeBlessure = blessure;
-		this.typeSauvegarde = sauvegarde;
-	}
-
-	protected ArmeT(int portee, int f, int pa, int nbTir) {
-		this(portee, f, pa, nbTir, "normal", "normal", "normal");
 	}
 
 	// ************* Attaque de Surface *****************
-
+	// ATTENTION REVOIR APRES AVOIR FAIT LES ATTAQUES CLASSIQUES
 	public void associationTUT(Unite attaquant, Troupe troupeDef) {
 		if (this.associationAttaqueTSurface(attaquant) == null)
 			attaquant.attaquerTUT(troupeDef);
@@ -106,46 +106,6 @@ public abstract class ArmeT {
 			else if (this.typeToucheT == "souffle")
 				retour = new AttaqueTSouffle(attaquant, x, y);
 		}
-		return retour;
-	}
-
-	// ************* constructeurs de combat *****************
-
-	public ToucheT associationToucheT(Unite attaquant, Unite defenseur) {
-		ToucheT retour = null;
-		if (typeToucheT == "normal")
-			retour = new ToucheTNormale(attaquant, defenseur);
-		else if (typeToucheT == "surchauffe")
-			retour = new ToucheTSurchauffe(attaquant, defenseur);
-
-		return retour;
-	}
-
-	public Blessure associationBlessure(Unite attaquant, Unite defenseur,
-			Blessure blessure) {
-		Blessure retour = null;
-
-		if (blessure instanceof BlessureInutile)
-			retour = blessure;
-		else if (typeBlessure == "normal")
-			retour = new BlessureNormale(attaquant, defenseur);
-		else if (typeBlessure == "perforante")
-			retour = new BlessurePerforante(attaquant, defenseur);
-		else if (typeBlessure == "sniper")
-			retour = new BlessureSniper(attaquant, defenseur);
-
-		return retour;
-	}
-
-	public Sauvegarde associationSauvegarde(Unite attaquant, Unite defenseur,
-			Sauvegarde sauvegarde) {
-		Sauvegarde retour = null;
-
-		if (sauvegarde instanceof SauvegardeInutile)
-			retour = sauvegarde;
-		else if (typeSauvegarde == "normal")
-			retour = new SauvegardeNormale(attaquant, defenseur);
-
 		return retour;
 	}
 

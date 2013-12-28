@@ -3,9 +3,6 @@ package principal.ToucheC;
 import de.De;
 import de.De6;
 import principal.Infanterie;
-import principal.Blesse.Blessure;
-import principal.Blesse.BlessureInutile;
-import principal.Blesse.BlessureNormale;
 
 public class ToucheCNormale extends ToucheCMere implements ToucheC {
 	private int ccAt, ccDef;
@@ -16,9 +13,9 @@ public class ToucheCNormale extends ToucheCMere implements ToucheC {
 		this.ccDef = defenseur.getCc();
 	}
 
-	public Blessure toucherC() {
+	public boolean toucherC() {
 		De de = new De6();
-		Blessure blessure;
+		boolean retour;
 		int jet = de.jet();
 		int tableJet[][] = { { 4, 4, 5, 5, 5, 5, 5, 5, 5, 5 },
 				{ 3, 4, 4, 4, 5, 5, 5, 5, 5, 5 },
@@ -31,9 +28,9 @@ public class ToucheCNormale extends ToucheCMere implements ToucheC {
 				{ 3, 3, 3, 3, 3, 3, 3, 3, 4, 4 },
 				{ 3, 3, 3, 3, 3, 3, 3, 3, 3, 4 } };
 		if (jet >= tableJet[ccAt - 1][ccDef - 1])
-			blessure = new BlessureNormale(attaquant, defenseur);
+			retour = true;
 		else
-			blessure = new BlessureInutile(attaquant, defenseur);
-		return blessure;
+			retour = false;
+		return retour;
 	}
 }
