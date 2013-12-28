@@ -1,26 +1,16 @@
 package principal;
 
-import java.util.ArrayList;
 import principal.Blesse.Blessure;
 import principal.Blesse.BlessureNormale;
-import principal.Blesse.BlessurePerforante;
-import principal.Blesse.BlessureSniper;
 import principal.Sauvegarde.Sauvegarde;
-import principal.Sauvegarde.SauvegardeInutile;
 import principal.Sauvegarde.SauvegardeNormale;
 import principal.ToucheT.ToucheT;
 import principal.ToucheT.ToucheTNormale;
-import principal.ToucheT.ToucheTSurchauffe;
-import principal.armeT.attaqueT.AttaqueT;
-import principal.armeT.attaqueT.AttaqueTSouffle;
-import principal.armeT.attaqueT.AttaqueTSurface;
-import principal.armeT.attaqueT.ToucheTExplosion;
-import principal.armeT.attaqueT.ToucheTGrandeExplosion;
 import principal.vehicule.EffetDegat;
 import principal.vehicule.Penetration;
 import principal.vehicule.PenetrationBlindage;
 
-public abstract class ArmeT {
+public class ArmeT {
 	protected boolean used;
 	protected int portee;
 	protected int f;
@@ -43,49 +33,51 @@ public abstract class ArmeT {
 		Sauvegarde sauv = new SauvegardeNormale(attaquant, defenseur);
 		sauv.sauver();
 	}
-	
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-	
+
+	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
 	protected Penetration pen;
-	
-	protected boolean blesser(Infanterie attaquant, Vehicule defenseur){
-		PenetrationBlindage bls = new PenetrationBlindage(attaquant,defenseur);
+
+	protected boolean blesser(Infanterie attaquant, Vehicule defenseur) {
+		PenetrationBlindage bls = new PenetrationBlindage(attaquant, defenseur);
 		pen = bls;
 		return bls.blesser();
 	}
-	
-	protected boolean blesser(Vehicule attaquant, Vehicule defenseur){
-		PenetrationBlindage bls = new PenetrationBlindage(attaquant,defenseur,this);
+
+	protected boolean blesser(Vehicule attaquant, Vehicule defenseur) {
+		PenetrationBlindage bls = new PenetrationBlindage(attaquant, defenseur,
+				this);
 		pen = bls;
 		return bls.blesser();
 	}
-	
-	protected boolean blesser(Unite attaquant, Vehicule defenseur){
+
+	protected boolean blesser(Unite attaquant, Vehicule defenseur) {
 		boolean retour = false;
-		if(attaquant instanceof Infanterie){
+		if (attaquant instanceof Infanterie) {
 			Infanterie at = (Infanterie) attaquant;
 			retour = this.blesser(at, defenseur);
-		}
-		else if(attaquant instanceof Vehicule){
+		} else if (attaquant instanceof Vehicule) {
 			Vehicule at = (Vehicule) attaquant;
 			retour = this.blesser(at, defenseur);
 		}
 		return retour;
 	}
-	
-	protected void sauver(Vehicule defenseur){
-		Sauvegarde sauvegarde = new EffetDegat(defenseur,this.pen);
+
+	protected void sauver(Vehicule defenseur) {
+		Sauvegarde sauvegarde = new EffetDegat(defenseur, this.pen);
 		sauvegarde.sauver();
 	}
-	
+
 	// ********************* les actions **********************
 
-	public abstract boolean isAbleToCharge();
+	public boolean isAbleToCharge() {
+		return true;
+	}
 
 	public boolean aPorte(Unite attaquant, Unite defenseur) {
 		return attaquant.aPorte(this.portee, defenseur);
 	}
-	
+
 	public void attaquerT(Unite attaquant, Infanterie defenseur) {
 		if (this.aPorte(attaquant, defenseur)) {
 			if (this.toucherT(attaquant, defenseur)) {
@@ -94,9 +86,9 @@ public abstract class ArmeT {
 			}
 		}
 	}
-	
-	public void attaquerT(Unite attaquant, Vehicule defenseur){
-		if(this.aPorte(attaquant, defenseur)){
+
+	public void attaquerT(Unite attaquant, Vehicule defenseur) {
+		if (this.aPorte(attaquant, defenseur)) {
 			if (this.toucherT(attaquant, defenseur)) {
 				if (this.blesser(attaquant, defenseur))
 					this.sauver(defenseur);
@@ -104,18 +96,17 @@ public abstract class ArmeT {
 		}
 	}
 
-	public void attaquerTUT(Unite attaquant, Troupe troupeDef) {
-		this.associationTUT(attaquant, troupeDef);
-	}
-	
-/*  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-	
-	public void attaquerT(Unite attaquant, Unite defenseur){
-		if(attaquant instanceof Infanterie){
+	/*
+	 * ATTENTION public void attaquerTUT(Unite attaquant, Troupe troupeDef) {
+	 * this.associationTUT(attaquant, troupeDef); }
+	 */
+	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+	public void attaquerT(Unite attaquant, Unite defenseur) {
+		if (attaquant instanceof Infanterie) {
 			Infanterie at = (Infanterie) attaquant;
 			this.attaquerT(at, defenseur);
-		}
-		else if(attaquant instanceof Vehicule){
+		} else if (attaquant instanceof Vehicule) {
 			Vehicule at = (Vehicule) attaquant;
 			this.attaquerT(at, defenseur);
 		}
@@ -129,43 +120,46 @@ public abstract class ArmeT {
 		this.nbTir = nbTir;
 	}
 
-	// ************* Attaque de Surface *****************
-	// ATTENTION REVOIR APRES AVOIR FAIT LES ATTAQUES CLASSIQUES
-	public void associationTUT(Unite attaquant, Troupe troupeDef) {
-		if (this.associationAttaqueTSurface(attaquant) == null)
-			attaquant.attaquerTUT(troupeDef);
-		else
-			this.attaqueSurface(attaquant);
+	/*
+	 * // ************* Attaque de Surface ***************** // ATTENTION REVOIR
+	 * APRES AVOIR FAIT LES ATTAQUES CLASSIQUES public void associationTUT(Unite
+	 * attaquant, Troupe troupeDef) { if
+	 * (this.associationAttaqueTSurface(attaquant) == null)
+	 * attaquant.attaquerTUT(troupeDef); else this.attaqueSurface(attaquant); }
+	 * 
+	 * public void attaqueSurface(Unite attaquant) { AttaqueTSurface ats; ats =
+	 * this.associationAttaqueTSurface(attaquant); ArrayList<Blessure> blessures
+	 * = ats.toucherT(); for (Blessure blessure : blessures) { Sauvegarde
+	 * sauvegarde = blessure.blesser(); sauvegarde.sauver(); } }
+	 * 
+	 * public AttaqueTSurface associationAttaqueTSurface(Unite attaquant) {
+	 * AttaqueTSurface retour = null; // en fait c'est le moment où il faudrait
+	 * demander à l'utilisateur de // décider des position d'attaque int x = 0,
+	 * y = 0; // a finir if (this.typeToucheT != "") { if (this.typeToucheT ==
+	 * "explosion") retour = new ToucheTExplosion(attaquant, x, y); else if
+	 * (this.typeToucheT == "grandeExplosion") retour = new
+	 * ToucheTGrandeExplosion(attaquant, x, y);
+	 * 
+	 * else if (this.typeToucheT == "souffle") retour = new
+	 * AttaqueTSouffle(attaquant, x, y); } return retour; }
+	 */
+	// ******************* constructeur par defaut ***********
+
+	public ArmeT() {
+		this.portee = 0;
+		this.f = 0;
+		this.pa = 7;
+		this.nbTir = 1;
 	}
-
-	public void attaqueSurface(Unite attaquant) {
-		AttaqueTSurface ats;
-		ats = this.associationAttaqueTSurface(attaquant);
-		ArrayList<Blessure> blessures = ats.toucherT();
-		for (Blessure blessure : blessures) {
-			Sauvegarde sauvegarde = blessure.blesser();
-			sauvegarde.sauver();
-		}
+	// ********************** visualisation ******************
+	
+	public String toString(){
+		String str;
+		str = "Je suis "+this.getClass().toString()+"\n";
+		str += "j'ai "+this.f+" force et "+this.pa+" pa.";
+		return str;
 	}
-
-	public AttaqueTSurface associationAttaqueTSurface(Unite attaquant) {
-		AttaqueTSurface retour = null;
-		// en fait c'est le moment où il faudrait demander à l'utilisateur de
-		// décider des position d'attaque
-		int x = 0, y = 0;
-		// a finir
-		if (this.typeToucheT != "") {
-			if (this.typeToucheT == "explosion")
-				retour = new ToucheTExplosion(attaquant, x, y);
-			else if (this.typeToucheT == "grandeExplosion")
-				retour = new ToucheTGrandeExplosion(attaquant, x, y);
-
-			else if (this.typeToucheT == "souffle")
-				retour = new AttaqueTSouffle(attaquant, x, y);
-		}
-		return retour;
-	}
-
+	
 	// ******************** getters et setters ***************
 
 	public int getPortee() {

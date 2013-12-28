@@ -1,13 +1,5 @@
 package principal;
 
-import classesDeTest.ArmeTTest;
-import principal.Blesse.Blessure;
-import principal.Sauvegarde.Sauvegarde;
-import principal.ToucheC.ToucheC;
-import principal.ToucheC.ToucheCNormale;
-import principal.ToucheT.ToucheT;
-import principal.ToucheT.ToucheTNormale;
-
 public class Infanterie extends Unite {
 	protected ArmeC armeC;
 	protected ArmeT armeT;
@@ -28,8 +20,16 @@ public class Infanterie extends Unite {
 		this.getArmeT().attaquerT(this, defenseur);
 
 		this.reset();
+		
 	}
-
+	
+	public void attaquerC(Vehicule defenseur) {
+		//ATTENTION   A IMPLEMENTER
+		// TODO Auto-generated method stub
+		
+	}
+	
+/* ATTENTION
 	public void attaquerC(Vehicule defenseur) {
 		this.save();
 
@@ -37,7 +37,7 @@ public class Infanterie extends Unite {
 
 		this.reset();
 	}	
-
+*/
 	public void attaquerT(Vehicule defenseur) {
 		this.save();
 
@@ -84,8 +84,8 @@ public class Infanterie extends Unite {
 	// *********** les constructeurs ************
 
 	protected Infanterie() {
-		this.armeT = new ArmeTTest();
-		this.armeC = new ArmeCTest();
+		this.armeT = new ArmeT();
+		this.armeC = new ArmeC();
 		this.blAvant = 0;
 		this.blFlanc = 0;
 		this.blArriere = 0;

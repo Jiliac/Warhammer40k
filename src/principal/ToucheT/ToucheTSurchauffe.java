@@ -3,7 +3,6 @@ package principal.ToucheT;
 import de.De6;
 import principal.Infanterie;
 import principal.Unite;
-import principal.UniteTest;
 import principal.Sauvegarde.Sauvegarde;
 import principal.Sauvegarde.SauvegardeNormale;
 
@@ -17,19 +16,18 @@ public class ToucheTSurchauffe extends ToucheTMere implements ToucheT {
 		// creation des variables...
 		De6 de = new De6();
 		int jet = de.jet();
-		// on traite le cas particulier
+		boolean retour;
 		if (jet == 1) {
+			retour = false;
 			if (attaquant instanceof Infanterie) {
 				Infanterie at = (Infanterie) attaquant;
-				Sauvegarde sauvegarde = new SauvegardeNormale(new UniteTest(),
-						at);
+				Sauvegarde sauvegarde = new SauvegardeNormale(null, at);
 				sauvegarde.sauver();
 			}
+		} else {
+			ToucheT tt = new ToucheTNormale(attaquant, defenseur, jet);
+			retour = tt.toucherT();
 		}
-
-		// et sinon on traite la variable normalement
-		ToucheT retour = new ToucheTNormale(attaquant, defenseur, jet);
-		return retour.toucherT();
-
+		return retour;
 	}
 }

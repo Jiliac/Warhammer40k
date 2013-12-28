@@ -8,7 +8,7 @@ import principal.ToucheC.ToucheC;
 import principal.ToucheC.ToucheCNormale;
 
 
-public abstract class ArmeC {
+public class ArmeC {
 	//ils peuvent p-e modifier la cc? donc il faudrait un attribut cc pour cette classe?
 	
 	// ******************* les trois phases *******************
