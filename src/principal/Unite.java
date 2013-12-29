@@ -42,25 +42,9 @@ public abstract class Unite {
 
 	/* - - - - - - - - - - - - - - - - - - - - - - - - */
 
-	public void attaquerCUT(Troupe troupe) {
-		ArrayList<Unite> tr = troupe.getTroupe();
-		for (Unite defenseur : tr) {
-			for (int i = 0; i < this.getA(); i++) {
-				this.attaquerC(defenseur);
-				troupe.restructure();
-			}
-		}
-	}
+	public abstract void attaquerCUT(Troupe troupe) ;
 
-	public void attaquerTUT(Troupe troupe) {
-		ArrayList<Unite> tr = troupe.getTroupe();
-		for (Unite defenseur : tr) {
-			for (int i = 0; i < this.getArmeT().getNbTir(); i++) {
-				this.attaquerT(defenseur);
-				troupe.restructure();
-			}
-		}
-	}
+	public abstract void attaquerTUT(Troupe troupe) ;
 
 	// *********** gestion de la position ***********
 
@@ -113,16 +97,6 @@ public abstract class Unite {
 
 	// *********** les getters et setters **************
 
-	public ArmeT getArmeT() {
-		return armes.get(0);
-	}
-
-	public void setArmeT(ArmeT arme) {
-		if (armes.size() == 0)
-			armes.add(arme);
-		else
-			armes.add(0, arme);
-	}
 
 	public int getCc() {
 		return cc;

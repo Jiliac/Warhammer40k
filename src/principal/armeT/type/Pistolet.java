@@ -1,4 +1,4 @@
-package principal.armeT;
+package principal.armeT.type;
 
 
 public class Pistolet extends ArmeAssaut{

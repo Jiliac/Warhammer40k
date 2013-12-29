@@ -24,7 +24,7 @@ public class ArmeC {
 	}
 
 	protected void sauver(Infanterie attaquant, Infanterie defenseur) {
-		Sauvegarde sauv = new SauvegardeNormale(attaquant, defenseur);
+		Sauvegarde sauv = new SauvegardeNormale(attaquant, defenseur, new ArmeT());
 		sauv.sauver();
 	}
 	

@@ -1,6 +1,7 @@
 package principal.ToucheT;
 
 import de.De6;
+import principal.ArmeT;
 import principal.Infanterie;
 import principal.Unite;
 import principal.Sauvegarde.Sauvegarde;
@@ -21,7 +22,7 @@ public class ToucheTSurchauffe extends ToucheTMere implements ToucheT {
 			retour = false;
 			if (attaquant instanceof Infanterie) {
 				Infanterie at = (Infanterie) attaquant;
-				Sauvegarde sauvegarde = new SauvegardeNormale(null, at);
+				Sauvegarde sauvegarde = new SauvegardeNormale(null, at, new ArmeT());
 				sauvegarde.sauver();
 			}
 		} else {

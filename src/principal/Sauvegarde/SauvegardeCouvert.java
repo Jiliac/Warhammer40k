@@ -3,6 +3,7 @@ package principal.Sauvegarde;
 
 import de.De;
 import de.De6;
+import principal.ArmeT;
 import principal.Infanterie;
 import principal.Terrain;
 import principal.Unite;
@@ -11,7 +12,7 @@ import principal.Sauvegarde.Sauvegarde;
 public class SauvegardeCouvert extends SauvegardeMere implements Sauvegarde{
 	int svgC=7;
 	public SauvegardeCouvert(Unite attaquant,Infanterie defenseur){
-		super(attaquant,defenseur);
+		super(attaquant,defenseur,new ArmeT());
 		this.svgC=this.setSvgC(defenseur);
 	}
 	

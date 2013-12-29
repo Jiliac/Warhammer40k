@@ -1,21 +1,22 @@
-package principal.armeT.attaqueT;
+package principal.armeT.attaqueTSurface;
 
 import java.util.ArrayList;
 
+import de.DeDir;
 import principal.Terrain;
 import principal.Unite;
 import principal.Blesse.Blessure;
 import principal.ToucheT.ToucheTNormale;
-import de.DeDir;
 
-public class AttaqueTSouffle implements AttaqueTSurface{
+public class ToucheTExplosionMere implements AttaqueTSurface{
 	Unite attaquant;
-	int x, y;
+	int x, y, rayon;
 
-	public AttaqueTSouffle(Unite attaquant, int x, int y) {
-		this.attaquant = attaquant;
+	public ToucheTExplosionMere(Unite attaquant, int x, int y, int rayon) {
 		this.x = x;
 		this.y = y;
+		this.rayon = rayon;
+		this.attaquant = attaquant;
 	}
 
 	// en fait ce sera à faire quand je ferai les unites qui attaques des troupes!!!
@@ -27,7 +28,7 @@ public class AttaqueTSouffle implements AttaqueTSurface{
 		int posY = jet[1] + y;
 
 		Terrain terrain = new Terrain();
-		ArrayList<Unite> troupeDef = terrain.zoneSouffle(posX, posY);
+		ArrayList<Unite> troupeDef = terrain.zoneCercle(posX, posY, rayon);
 
 		ArrayList<Blessure> retour = new ArrayList<Blessure>();
 		for (Unite defenseur : troupeDef) {

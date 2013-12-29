@@ -9,66 +9,64 @@ public class Vehicule extends Unite {
 	String etatMouvement;
 
 	// ****************** actions **********************
-	
-	public void attaquerT(Unite defenseur){
-		if(this.etatMouvement=="immobile"){
-			for(ArmeT armeT : armes){
+
+	public void attaquerT(Unite defenseur) {
+		if (this.etatMouvement == "immobile") {
+			for (ArmeT armeT : armes) {
 				armeT.attaquerT(this, defenseur);
 			}
-		}
-		else if(this.etatMouvement=="combat"){
-			this.choisirArme(); //ATTENTION A DEFINIR
-			for(ArmeT arme : armes){
-				if (armes.indexOf(arme)==0)
+		} else if (this.etatMouvement == "combat") {
+			this.choisirArme(); // ATTENTION A DEFINIR
+			for (ArmeT arme : armes) {
+				if (armes.indexOf(arme) == 0)
 					arme.attaquerT(this, defenseur);
 				else
 					arme.setUtilisable(false);
 			}
 		}
-		}
-	}
-	
-	private void choisirArme() {
-		// A DEFINIR, choix de l'utilisateur		
-	}
-	
-	// ********** les jets de degats *****************
-	
-	public void secouer(){
-	
-	}
-	
-	public void sonne(){
-		
 	}
 
-	public void armeDetruite(){
-		
+	private void choisirArme() {
+		// A DEFINIR, choix de l'utilisateur
 	}
-	
-	public void immobilise(){
-		
+
+	// ********** les jets de degats *****************
+
+	public void secouer() {
+
 	}
-	
-	public void epave(){
+
+	public void sonne() {
+
+	}
+
+	public void armeDetruite() {
+
+	}
+
+	public void immobilise() {
+
+	}
+
+	public void epave() {
 		this.pertePv();
 	}
-	
-	public void explosion(){
+
+	public void explosion() {
 		this.pertePv();
 		De6 de = De6();
 		rayon = de.jet();
-		//et la j'ai plein de problemes, les unites prises dans explosions
+		// et la j'ai plein de problemes, les unites prises dans explosions
 	}
-	
+
 	// ************* constructeur de combat ***********
 	public int associerBlindage(Unite attaquant, Vehicule vehicule) {
-		// 	A DEFINIR, ca va dependre des position sur le terrain
+		// A DEFINIR, ca va dependre des position sur le terrain
 		return this.blAvant;
 	}
-	
+
 	// ************** les constructeurs *****************
-	
+
 	public Vehicule() {
 		this.setEtatMouvement("immobile");
 		this.cc = 0;
@@ -99,7 +97,8 @@ public class Vehicule extends Unite {
 	public void setEtatMouvement(String em) {
 		if (em != null) {
 			String etatm = em.toLowerCase();
-			if(etatm=="immobile" || etatm == "combat" || etatm == "manoeuvre")
+			if (etatm == "immobile" || etatm == "combat"
+					|| etatm == "manoeuvre")
 				this.etatMouvement = em;
 		}
 	}

@@ -1,4 +1,4 @@
-package principal.armeT;
+package principal.armeT.type;
 
 import principal.ArmeT;
 

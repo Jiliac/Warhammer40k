@@ -1,5 +1,6 @@
 package principal.Blesse;
 
+import principal.ArmeT;
 import principal.Infanterie;
 import principal.Unite;
 import de.De;
@@ -7,8 +8,11 @@ import de.De6;
 
 public class BlessurePerforante extends BlessureMere implements Blessure {
 
-	public BlessurePerforante(Unite attaquant, Infanterie defenseur) {
+	protected ArmeT armeT;
+
+	public BlessurePerforante(Unite attaquant, Infanterie defenseur, ArmeT armeT) {
 		super(attaquant, defenseur);
+		this.armeT = armeT;
 	}
 
 	public boolean blesser() {
@@ -16,10 +20,11 @@ public class BlessurePerforante extends BlessureMere implements Blessure {
 		int jet = de.jet();
 		boolean retour;
 
-		// la il faut envisager le cas où on attaque un vehicule et le cas où on
+		// la il faut envisager le cas où on attaque un vehicule et le cas où
+		// on
 		// attaque infanterie
 		if (jet == 6) {
-			attaquant.getArmeT().setPa(2);
+			this.armeT.setPa(2);
 			retour = true;
 		} else {
 			BlessureNormale blessure = new BlessureNormale(attaquant,

@@ -1,5 +1,7 @@
 package principal;
 
+import java.util.ArrayList;
+
 public class Infanterie extends Unite {
 	protected ArmeC armeC;
 	protected ArmeT armeT;
@@ -20,31 +22,47 @@ public class Infanterie extends Unite {
 		this.getArmeT().attaquerT(this, defenseur);
 
 		this.reset();
-		
+
 	}
-	
-	public void attaquerC(Vehicule defenseur) {
-		//ATTENTION   A IMPLEMENTER
-		// TODO Auto-generated method stub
-		
-	}
-	
-/* ATTENTION
+
 	public void attaquerC(Vehicule defenseur) {
 		this.save();
 
+		// ca c'est un truc compliquer ou le vehicule charge...
 		this.getArmeC().attaquerC(this, defenseur);
 
 		this.reset();
-	}	
-*/
+	}
+
 	public void attaquerT(Vehicule defenseur) {
 		this.save();
 
 		this.getArmeT().attaquerT(this, defenseur);
 
 		this.reset();
-	}	
+	}
+
+	// ************** les attaques de troupes *********
+
+	public void attaquerCUT(Troupe troupe) {
+		ArrayList<Unite> tr = troupe.getTroupe();
+		for (Unite defenseur : tr) {
+			for (int i = 0; i < this.getA(); i++) {
+				this.attaquerC(defenseur);
+				troupe.restructure();
+			}
+		}
+	}
+
+	public void attaquerTUT(Troupe troupe) {
+		ArrayList<Unite> tr = troupe.getTroupe();
+		for (Unite defenseur : tr) {
+			for (int i = 0; i < this.getArmeT().getNbTir(); i++) {
+				this.attaquerT(defenseur);
+				troupe.restructure();
+			}
+		}
+	}
 
 	// ********** la memoire de la classe ********
 
@@ -109,6 +127,10 @@ public class Infanterie extends Unite {
 
 	public ArmeC getArmeC() {
 		return armeC;
+	}
+
+	public void setArmeC(ArmeC armeC) {
+		this.armeC = armeC;
 	}
 
 	public ArmeT getArmeT() {

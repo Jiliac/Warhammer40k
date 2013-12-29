@@ -6,13 +6,17 @@ import principal.Sauvegarde.Sauvegarde;
 import principal.Sauvegarde.SauvegardeNormale;
 import principal.ToucheT.ToucheT;
 import principal.ToucheT.ToucheTNormale;
+import principal.armeT.attaqueT.AttaqueT;
+import principal.armeT.attaqueT.AttaqueTInf;
+import principal.armeT.attaqueT.AttaqueTVeh;
 import principal.vehicule.EffetDegat;
 import principal.vehicule.Penetration;
 import principal.vehicule.PenetrationBlindage;
 
 public class ArmeT {
-	//ATTENTION IMPLEMENTER la variable utilisable me semble necessaire dans le cas de vehicule...
-	//p-e implementer un objet pour gerer cette "collection" de vehicule
+	// ATTENTION IMPLEMENTER la variable utilisable me semble necessaire dans le
+	// cas de vehicule...
+	// p-e implementer un objet pour gerer cette "collection" de vehicule
 	protected boolean used;
 	protected int portee;
 	protected int f;
@@ -21,18 +25,18 @@ public class ArmeT {
 
 	// ******************* les trois phases *******************
 
-	protected boolean toucherT(Unite attaquant, Unite defenseur) {
+	public boolean toucherT(Unite attaquant, Unite defenseur) {
 		ToucheT tt = new ToucheTNormale(attaquant, defenseur);
 		return tt.toucherT();
 	}
 
-	protected boolean blesser(Unite attaquant, Infanterie defenseur) {
+	public boolean blesser(Unite attaquant, Infanterie defenseur) {
 		Blessure bls = new BlessureNormale(attaquant, defenseur);
 		return bls.blesser();
 	}
 
-	protected void sauver(Unite attaquant, Infanterie defenseur) {
-		Sauvegarde sauv = new SauvegardeNormale(attaquant, defenseur);
+	public void sauver(Unite attaquant, Infanterie defenseur) {
+		Sauvegarde sauv = new SauvegardeNormale(attaquant, defenseur, this);
 		sauv.sauver();
 	}
 
@@ -40,20 +44,20 @@ public class ArmeT {
 
 	protected Penetration pen;
 
-	protected boolean blesser(Infanterie attaquant, Vehicule defenseur) {
+	public boolean blesser(Infanterie attaquant, Vehicule defenseur) {
 		PenetrationBlindage bls = new PenetrationBlindage(attaquant, defenseur);
 		pen = bls;
 		return bls.blesser();
 	}
 
-	protected boolean blesser(Vehicule attaquant, Vehicule defenseur) {
+	public boolean blesser(Vehicule attaquant, Vehicule defenseur) {
 		PenetrationBlindage bls = new PenetrationBlindage(attaquant, defenseur,
 				this);
 		pen = bls;
 		return bls.blesser();
 	}
 
-	protected boolean blesser(Unite attaquant, Vehicule defenseur) {
+	public boolean blesser(Unite attaquant, Vehicule defenseur) {
 		boolean retour = false;
 		if (attaquant instanceof Infanterie) {
 			Infanterie at = (Infanterie) attaquant;
@@ -65,7 +69,7 @@ public class ArmeT {
 		return retour;
 	}
 
-	protected void sauver(Vehicule defenseur) {
+	public void sauver(Vehicule defenseur) {
 		Sauvegarde sauvegarde = new EffetDegat(defenseur, this.pen);
 		sauvegarde.sauver();
 	}
@@ -81,21 +85,13 @@ public class ArmeT {
 	}
 
 	public void attaquerT(Unite attaquant, Infanterie defenseur) {
-		if (this.aPorte(attaquant, defenseur)) {
-			if (this.toucherT(attaquant, defenseur)) {
-				if (this.blesser(attaquant, defenseur))
-					this.sauver(attaquant, defenseur);
-			}
-		}
+		AttaqueT at = new AttaqueTInf(attaquant,defenseur,this);
+		at.attaquerT();
 	}
 
 	public void attaquerT(Unite attaquant, Vehicule defenseur) {
-		if (this.aPorte(attaquant, defenseur)) {
-			if (this.toucherT(attaquant, defenseur)) {
-				if (this.blesser(attaquant, defenseur))
-					this.sauver(defenseur);
-			}
-		}
+		AttaqueT at = new AttaqueTVeh(attaquant,defenseur,this);
+		at.attaquerT();
 	}
 
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -118,11 +114,9 @@ public class ArmeT {
 		this.nbTir = nbTir;
 	}
 
-	
-	 // ************* Attaque de Surface ***************** 
-	// ATTENTION REVOIR APRES AVOIR FAIT LES ATTAQUES CLASSIQUES 
-	
-	
+	// ************* Attaque de Surface *****************
+	// ATTENTION REVOIR APRES AVOIR FAIT LES ATTAQUES CLASSIQUES
+
 	// ******************* constructeur par defaut ***********
 
 	public ArmeT() {
@@ -131,17 +125,18 @@ public class ArmeT {
 		this.pa = 7;
 		this.nbTir = 1;
 	}
+
 	// ********************** visualisation ******************
-	
-	public String toString(){
+
+	public String toString() {
 		String str;
-		str = "Je suis "+this.getClass().toString()+"\n";
-		str += "j'ai "+this.f+" force et "+this.pa+" pa.";
+		str = "Je suis " + this.getClass().toString() + "\n";
+		str += "j'ai " + this.f + " force et " + this.pa + " pa.";
 		return str;
 	}
-	
-	// ******************** getters et setters ***************
 
+	// ******************** getters et setters ***************
+	
 	public int getPortee() {
 		return portee;
 	}

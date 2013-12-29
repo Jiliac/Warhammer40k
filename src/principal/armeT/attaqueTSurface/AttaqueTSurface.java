@@ -1,4 +1,4 @@
-package principal.armeT.attaqueT;
+package principal.armeT.attaqueTSurface;
 
 import java.util.ArrayList;
 import principal.Blesse.Blessure;

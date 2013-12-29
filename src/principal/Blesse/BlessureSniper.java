@@ -1,13 +1,16 @@
 package principal.Blesse;
 
+import principal.ArmeT;
 import principal.Infanterie;
 import principal.Unite;
 import de.De6;
 
 public class BlessureSniper extends BlessureMere implements Blessure {
-	public BlessureSniper(Unite attaquant, Infanterie defenseur) {
+
+	protected ArmeT armeT;
+	public BlessureSniper(Unite attaquant, Infanterie defenseur, ArmeT armeT) {
 		super(attaquant, defenseur);
-		// TODO Auto-generated constructor stub
+		this.armeT = armeT;
 	}
 
 	public boolean blesser() {
@@ -17,7 +20,7 @@ public class BlessureSniper extends BlessureMere implements Blessure {
 		
 		// idem que pour blessure perforante...
 		if (jet == 6) {
-			attaquant.getArmeT().setPa(2);
+			this.armeT.setPa(2);
 			retour = true;
 		} else if (jet >= 4)
 			retour = true;
