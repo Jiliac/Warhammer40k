@@ -18,8 +18,8 @@ public abstract class Unite {
 
 	public abstract void attaquerT(Vehicule defenseur);
 
-/*     - - - - - - - - - - - - - - - - - - - - - - - -    */
-	
+	/* - - - - - - - - - - - - - - - - - - - - - - - - */
+
 	public void attaquerC(Unite defenseur) {
 		if (defenseur instanceof Infanterie) {
 			Infanterie def = (Infanterie) defenseur;
@@ -39,20 +39,26 @@ public abstract class Unite {
 			this.attaquerT(def);
 		}
 	}
-	
-/*     - - - - - - - - - - - - - - - - - - - - - - - -    */
-	
+
+	/* - - - - - - - - - - - - - - - - - - - - - - - - */
+
 	public void attaquerCUT(Troupe troupe) {
 		ArrayList<Unite> tr = troupe.getTroupe();
 		for (Unite defenseur : tr) {
-			this.attaquerC(defenseur);
+			for (int i = 0; i < this.getA(); i++) {
+				this.attaquerC(defenseur);
+				troupe.restructure();
+			}
 		}
 	}
 
 	public void attaquerTUT(Troupe troupe) {
 		ArrayList<Unite> tr = troupe.getTroupe();
 		for (Unite defenseur : tr) {
-			this.attaquerT(defenseur);
+			for (int i = 0; i < this.getArmeT().getNbTir(); i++) {
+				this.attaquerT(defenseur);
+				troupe.restructure();
+			}
 		}
 	}
 

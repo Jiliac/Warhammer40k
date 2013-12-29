@@ -11,6 +11,8 @@ import principal.vehicule.Penetration;
 import principal.vehicule.PenetrationBlindage;
 
 public class ArmeT {
+	//ATTENTION IMPLEMENTER la variable utilisable me semble necessaire dans le cas de vehicule...
+	//p-e implementer un objet pour gerer cette "collection" de vehicule
 	protected boolean used;
 	protected int portee;
 	protected int f;
@@ -96,10 +98,6 @@ public class ArmeT {
 		}
 	}
 
-	/*
-	 * ATTENTION public void attaquerTUT(Unite attaquant, Troupe troupeDef) {
-	 * this.associationTUT(attaquant, troupeDef); }
-	 */
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 	public void attaquerT(Unite attaquant, Unite defenseur) {
@@ -120,29 +118,11 @@ public class ArmeT {
 		this.nbTir = nbTir;
 	}
 
-	/*
-	 * // ************* Attaque de Surface ***************** // ATTENTION REVOIR
-	 * APRES AVOIR FAIT LES ATTAQUES CLASSIQUES public void associationTUT(Unite
-	 * attaquant, Troupe troupeDef) { if
-	 * (this.associationAttaqueTSurface(attaquant) == null)
-	 * attaquant.attaquerTUT(troupeDef); else this.attaqueSurface(attaquant); }
-	 * 
-	 * public void attaqueSurface(Unite attaquant) { AttaqueTSurface ats; ats =
-	 * this.associationAttaqueTSurface(attaquant); ArrayList<Blessure> blessures
-	 * = ats.toucherT(); for (Blessure blessure : blessures) { Sauvegarde
-	 * sauvegarde = blessure.blesser(); sauvegarde.sauver(); } }
-	 * 
-	 * public AttaqueTSurface associationAttaqueTSurface(Unite attaquant) {
-	 * AttaqueTSurface retour = null; // en fait c'est le moment où il faudrait
-	 * demander à l'utilisateur de // décider des position d'attaque int x = 0,
-	 * y = 0; // a finir if (this.typeToucheT != "") { if (this.typeToucheT ==
-	 * "explosion") retour = new ToucheTExplosion(attaquant, x, y); else if
-	 * (this.typeToucheT == "grandeExplosion") retour = new
-	 * ToucheTGrandeExplosion(attaquant, x, y);
-	 * 
-	 * else if (this.typeToucheT == "souffle") retour = new
-	 * AttaqueTSouffle(attaquant, x, y); } return retour; }
-	 */
+	
+	 // ************* Attaque de Surface ***************** 
+	// ATTENTION REVOIR APRES AVOIR FAIT LES ATTAQUES CLASSIQUES 
+	
+	
 	// ******************* constructeur par defaut ***********
 
 	public ArmeT() {
