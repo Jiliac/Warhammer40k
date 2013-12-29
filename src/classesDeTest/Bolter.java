@@ -1,6 +1,6 @@
 package classesDeTest;
 
-import principal.armeT.ArmeTirRapide;
+import principal.armeT.type.ArmeTirRapide;
 
 public class Bolter extends ArmeTirRapide{
 	public Bolter(){

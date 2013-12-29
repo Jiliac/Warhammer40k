@@ -25,7 +25,7 @@ public class Troupe {
 	protected Troupe(int nbMin, int nbMax) {
 		this.nbMin = nbMin;
 		this.nbMax = nbMax;
-		troupe = new ArrayList();
+		troupe = new ArrayList<Unite>();
 	}
 
 	// *********** ajout d'unite ***************

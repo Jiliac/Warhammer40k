@@ -3,39 +3,53 @@ package principal.armeT.attaqueTSurface;
 import java.util.ArrayList;
 
 import de.DeDir;
+import principal.ArmeT;
 import principal.Terrain;
 import principal.Unite;
-import principal.Blesse.Blessure;
-import principal.ToucheT.ToucheTNormale;
 
-public class ToucheTExplosionMere implements AttaqueTSurface{
+public class ToucheTExplosionMere implements AttaqueTSurface {
 	Unite attaquant;
+	ArmeT armeT;
 	int x, y, rayon;
 
-	public ToucheTExplosionMere(Unite attaquant, int x, int y, int rayon) {
+	public ToucheTExplosionMere(Unite attaquant, int x, int y, int rayon,
+			ArmeT armeT) {
 		this.x = x;
 		this.y = y;
 		this.rayon = rayon;
 		this.attaquant = attaquant;
+		this.armeT = armeT;
 	}
 
-	// en fait ce sera à faire quand je ferai les unites qui attaques des troupes!!!
-	// j'ai besoin de retourner une liste de blessure
-	public ArrayList<Blessure> toucherT() {
-		DeDir jetDir = new DeDir();
-		int[] jet = jetDir.jetPos();
-		int posX = jet[0] + x;
-		int posY = jet[1] + y;
+	public ArrayList<Unite> toucherT() {
+		ArrayList<Unite> retour;
 
-		Terrain terrain = new Terrain();
-		ArrayList<Unite> troupeDef = terrain.zoneCercle(posX, posY, rayon);
+		if (this.aPorte()) {
 
-		ArrayList<Blessure> retour = new ArrayList<Blessure>();
-		for (Unite defenseur : troupeDef) {
-			ToucheTNormale ttn = new ToucheTNormale(attaquant, defenseur);
-			retour.add(ttn.toucherT());
-		}
-		
+			DeDir jetDir = new DeDir();
+			int[] jet = jetDir.jetPos();
+			int posX = jet[0] + x;
+			int posY = jet[1] + y;
+
+			Terrain terrain = new Terrain();
+			retour = terrain.zoneCercle(posX, posY, rayon);
+		} else
+			retour = new ArrayList<Unite>();
+
+		return retour;
+	}
+
+	private boolean aPorte() {
+		boolean retour;
+
+		int posX = attaquant.getPosX(), posY = attaquant.getPosY();
+		double distance = Math.sqrt((posX - x) * (posX - x) + (posY - y)
+				* (posY - y));
+		if (distance <= armeT.getPortee())
+			retour = true;
+		else
+			retour = false;
+
 		return retour;
 	}
 

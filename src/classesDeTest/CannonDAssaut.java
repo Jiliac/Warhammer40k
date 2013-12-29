@@ -4,7 +4,7 @@ import principal.Infanterie;
 import principal.Unite;
 import principal.Blesse.Blessure;
 import principal.Blesse.BlessurePerforante;
-import principal.armeT.ArmeLourde;
+import principal.armeT.type.ArmeLourde;
 
 public class CannonDAssaut extends ArmeLourde {
 	public CannonDAssaut() {

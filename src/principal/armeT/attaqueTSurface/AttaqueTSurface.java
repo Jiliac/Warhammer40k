@@ -1,8 +1,9 @@
 package principal.armeT.attaqueTSurface;
 
 import java.util.ArrayList;
-import principal.Blesse.Blessure;
+
+import principal.Unite;
 
 public interface AttaqueTSurface {
-	public ArrayList<Blessure> toucherT();
+	public ArrayList<Unite> toucherT();
 }
