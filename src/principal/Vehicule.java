@@ -2,32 +2,60 @@ package principal;
 
 import java.util.ArrayList;
 
+import principal.vehicule.ArmeMarquee;
+import principal.vehicule.ArmeV;
+
 import de.De6;
 
-//Attaque au c à c à faire mais bon, c'est pas important donc je le ferais plus tard
+//Attaque au cc à faire mais bon, c'est pas important donc je le ferais plus tard
 public class Vehicule extends Unite {
-	String etatMouvement;
+	protected String etatMouvement;
+	protected ArmeV armeV;
 
 	// ****************** actions **********************
 
-	public void attaquerT(Unite defenseur) {
+	public void attaquerT(Infanterie defenseur) {
+		// on set les armes à utiliser
 		if (this.etatMouvement == "immobile") {
-			for (ArmeT armeT : armes) {
-				armeT.attaquerT(this, defenseur);
-			}
+			armeV.setUtilisable();
 		} else if (this.etatMouvement == "combat") {
-			this.choisirArme(); // ATTENTION A DEFINIR
-			for (ArmeT arme : armes) {
-				if (armes.indexOf(arme) == 0)
-					arme.attaquerT(this, defenseur);
-				else
-					arme.setUtilisable(false);
-			}
+			ArmeT armeT = this.choisirArme();
+			armeV.setUniqueUtilisable(armeT);
+		} else if (this.etatMouvement == "manoeuvre") {
+			armeV.setInutilisable();
+		}
+
+		// et on utilise ces armes
+		ArrayList<ArmeT> armeAttaquante = armeV.getUtilisable();
+		for (ArmeT armeT : armeAttaquante) {
+			armeT.attaquerT(this, defenseur);
 		}
 	}
 
-	private void choisirArme() {
+	public void attaquerT(Vehicule defenseur) {
+		// on set les armes à utiliser
+		if (this.etatMouvement == "immobile") {
+			armeV.setUtilisable();
+		} else if (this.etatMouvement == "combat") {
+			ArmeT armeT = this.choisirArme();
+			armeV.setUniqueUtilisable(armeT);
+		} else if (this.etatMouvement == "manoeuvre") {
+			armeV.setInutilisable();
+		}
+
+		// et on utilise ces armes
+		ArrayList<ArmeT> armeAttaquante = armeV.getUtilisable();
+		for (ArmeT armeT : armeAttaquante) {
+			armeT.attaquerT(this, defenseur);
+		}
+	}
+
+	private ArmeT choisirArme() {
 		// A DEFINIR, choix de l'utilisateur
+
+		// comportement par defaut en attendant
+		ArmeT armeT = armeV.get(0);
+		return armeT;
 	}
 
 	// ********** les jets de degats *****************
@@ -68,6 +96,7 @@ public class Vehicule extends Unite {
 	// ************** les constructeurs *****************
 
 	public Vehicule() {
+		this.armeV = new ArmeV();
 		this.setEtatMouvement("immobile");
 		this.cc = 0;
 		this.f = 0;
@@ -80,12 +109,16 @@ public class Vehicule extends Unite {
 	}
 
 	public Vehicule(int ct, int blAvant, int blFlanc, int blArriere) {
+		this();
 		this.ct = ct;
 		this.blAvant = blAvant;
 		this.blFlanc = blFlanc;
 		this.blArriere = blArriere;
-
 		this.armes = new ArrayList<ArmeT>();
+	}
+
+	public void add(ArmeT armeT) {
+		this.armeV.add(armeT);
 	}
 
 	// ************** getters et setters *****************

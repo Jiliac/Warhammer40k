@@ -16,11 +16,6 @@ public class PenetrationBlindage extends Penetration implements Blessure {
 		this.vehicule = defenseur;
 		this.armeT = armeT;
 	}
-	public PenetrationBlindage(Unite attaquant, Vehicule defenseur){
-		this.attaquant = attaquant;
-		this.vehicule = defenseur;
-		this.armeT = attaquant.getArmeT();
-	}
 
 	public boolean blesser() {
 		int blindage = vehicule.associerBlindage(attaquant, vehicule);

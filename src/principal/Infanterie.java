@@ -10,35 +10,26 @@ public class Infanterie extends Unite {
 
 	public void attaquerC(Infanterie defenseur) {
 		this.save();
-
 		this.armeC.attaquerC(this, defenseur);
-
 		this.reset();
 	}
 
 	public void attaquerT(Infanterie defenseur) {
 		this.save();
-
 		this.getArmeT().attaquerT(this, defenseur);
-
 		this.reset();
 
 	}
 
 	public void attaquerC(Vehicule defenseur) {
 		this.save();
-
-		// ca c'est un truc compliquer ou le vehicule charge...
 		this.getArmeC().attaquerC(this, defenseur);
-
 		this.reset();
 	}
 
 	public void attaquerT(Vehicule defenseur) {
 		this.save();
-
 		this.getArmeT().attaquerT(this, defenseur);
-
 		this.reset();
 	}
 

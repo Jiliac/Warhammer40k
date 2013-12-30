@@ -44,29 +44,11 @@ public class ArmeT {
 
 	protected Penetration pen;
 
-	public boolean blesser(Infanterie attaquant, Vehicule defenseur) {
-		PenetrationBlindage bls = new PenetrationBlindage(attaquant, defenseur);
-		pen = bls;
-		return bls.blesser();
-	}
-
-	public boolean blesser(Vehicule attaquant, Vehicule defenseur) {
+	public boolean blesser(Unite attaquant, Vehicule defenseur) {
 		PenetrationBlindage bls = new PenetrationBlindage(attaquant, defenseur,
 				this);
 		pen = bls;
 		return bls.blesser();
-	}
-
-	public boolean blesser(Unite attaquant, Vehicule defenseur) {
-		boolean retour = false;
-		if (attaquant instanceof Infanterie) {
-			Infanterie at = (Infanterie) attaquant;
-			retour = this.blesser(at, defenseur);
-		} else if (attaquant instanceof Vehicule) {
-			Vehicule at = (Vehicule) attaquant;
-			retour = this.blesser(at, defenseur);
-		}
-		return retour;
 	}
 
 	public void sauver(Vehicule defenseur) {
@@ -85,12 +67,12 @@ public class ArmeT {
 	}
 
 	public void attaquerT(Unite attaquant, Infanterie defenseur) {
-		AttaqueT at = new AttaqueTInf(attaquant,defenseur,this);
+		AttaqueT at = new AttaqueTInf(attaquant, defenseur, this);
 		at.attaquerT();
 	}
 
 	public void attaquerT(Unite attaquant, Vehicule defenseur) {
-		AttaqueT at = new AttaqueTVeh(attaquant,defenseur,this);
+		AttaqueT at = new AttaqueTVeh(attaquant, defenseur, this);
 		at.attaquerT();
 	}
 
@@ -136,7 +118,7 @@ public class ArmeT {
 	}
 
 	// ******************** getters et setters ***************
-	
+
 	public int getPortee() {
 		return portee;
 	}
