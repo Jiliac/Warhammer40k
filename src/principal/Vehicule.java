@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import principal.vehicule.ArmeMarquee;
 import principal.vehicule.ArmeV;
-
 import de.De6;
 
 //Attaque au cc à faire mais bon, c'est pas important donc je le ferais plus tard
@@ -15,6 +14,8 @@ public class Vehicule extends Unite {
 	// ****************** actions **********************
 
 	public void attaquerT(Infanterie defenseur) {
+		this.save();
+		
 		// on set les armes à utiliser
 		if (this.etatMouvement == "immobile") {
 			armeV.setUtilisable();
@@ -30,9 +31,13 @@ public class Vehicule extends Unite {
 		for (ArmeT armeT : armeAttaquante) {
 			armeT.attaquerT(this, defenseur);
 		}
+		
+		this.reset();
 	}
 
 	public void attaquerT(Vehicule defenseur) {
+		this.save();
+		
 		// on set les armes à utiliser
 		if (this.etatMouvement == "immobile") {
 			armeV.setUtilisable();
@@ -48,6 +53,8 @@ public class Vehicule extends Unite {
 		for (ArmeT armeT : armeAttaquante) {
 			armeT.attaquerT(this, defenseur);
 		}
+		
+		this.reset();
 	}
 
 	private ArmeT choisirArme() {
@@ -56,6 +63,18 @@ public class Vehicule extends Unite {
 		// comportement par defaut en attendant
 		ArmeT armeT = armeV.get(0);
 		return armeT;
+	}
+
+	// ************ attaque de troupe ***************
+
+	public void attaquerTUT(Troupe troupe) {
+		ArrayList<Unite> tr = troupe.getTroupe();
+		for (Unite defenseur : tr) {
+			for (int i = 0; i < this.getArmeT().getNbTir(); i++) {
+				this.attaquerT(defenseur);
+				troupe.restructure();
+			}
+		}
 	}
 
 	// ********** les jets de degats *****************
@@ -82,8 +101,8 @@ public class Vehicule extends Unite {
 
 	public void explosion() {
 		this.pertePv();
-		De6 de = De6();
-		rayon = de.jet();
+		De6 de = new De6();
+		int rayon = de.jet();
 		// et la j'ai plein de problemes, les unites prises dans explosions
 	}
 
@@ -114,11 +133,36 @@ public class Vehicule extends Unite {
 		this.blAvant = blAvant;
 		this.blFlanc = blFlanc;
 		this.blArriere = blArriere;
-		this.armes = new ArrayList<ArmeT>();
+	}
+
+	public Vehicule(int ct, int blAvant, int blFlanc, int blArriere, ArmeV armeV) {
+		this(ct, blAvant, blFlanc, blArriere);
+		this.armeV = armeV;
 	}
 
 	public void add(ArmeT armeT) {
 		this.armeV.add(armeT);
+	}
+
+	// ************* m�moire de la classe ***************
+
+	protected int cts, blAvS, blFlS, blArS;
+	protected ArmeV armeVs;
+
+	public void save() {
+		this.cts = ct;
+		this.blAvS = blAvant;
+		this.blFlS = blFlanc;
+		this.blArS = blArriere;
+		this.armeVs = armeV;
+	}
+
+	public void reset() {
+		this.ct = cts;
+		this.blAvant = blAvS;
+		this.blFlanc = blFlS;
+		this.blArriere = blArS;
+		this.armeV = armeVs;
 	}
 
 	// ************** getters et setters *****************

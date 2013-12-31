@@ -2,6 +2,7 @@ package principal.armeC;
 
 import principal.ArmeC;
 import principal.Infanterie;
+import principal.Marcheur;
 import principal.Vehicule;
 
 public class AttaqueCVeh implements AttaqueC {
@@ -16,9 +17,18 @@ public class AttaqueCVeh implements AttaqueC {
 	}
 
 	public void attaquerC() {
-		if (armeC.toucherC(attaquant, defenseur)) {
-			if (armeC.blesser(attaquant, defenseur))
-				armeC.sauver(defenseur);
+		if (!(defenseur instanceof Marcheur)) {
+			if (armeC.toucherC(attaquant, defenseur)) {
+				if (armeC.blesser(attaquant, defenseur))
+					armeC.sauver(defenseur);
+			}
+		} else {
+			Marcheur def = (Marcheur) defenseur;
+			Infanterie inf = def.getInf();
+			if (armeC.toucherC(attaquant, inf)) {
+				if (armeC.blesser(attaquant, defenseur))
+					armeC.sauver(defenseur);
+			}
 		}
 	}
 }

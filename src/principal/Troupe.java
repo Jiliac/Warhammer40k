@@ -10,8 +10,12 @@ public class Troupe {
 
 	public void attaquerCTT(Troupe troupeDef) {
 		ArrayList<Unite> at = this.getTroupe();
-		for (Unite attaquant : at)
-			attaquant.attaquerCUT(troupeDef);
+		for (Unite attaquant : at) {
+			if (attaquant instanceof Infanterie) {
+				Infanterie atInf = (Infanterie) attaquant;
+				atInf.attaquerCUT(troupeDef);
+			}
+		}
 	}
 
 	public void attaquerTTT(Troupe troupeDef) {

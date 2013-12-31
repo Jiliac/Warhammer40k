@@ -1,20 +1,13 @@
 package principal;
 
-import java.util.ArrayList;
-
 public abstract class Unite {
 	protected int cc, ct, f, e, pv, i, a, cd, svg;
 	protected int blAvant, blFlanc, blArriere;
 	protected int posX = 0, posY = 0;
-	protected ArrayList<ArmeT> armes = new ArrayList<ArmeT>();
 
 	// ***************** les actions ****************
 
-	public abstract void attaquerC(Infanterie defenseur);
-
 	public abstract void attaquerT(Infanterie defenseur);
-
-	public abstract void attaquerC(Vehicule defenseur);
 
 	public abstract void attaquerT(Vehicule defenseur);
 
@@ -42,9 +35,7 @@ public abstract class Unite {
 
 	/* - - - - - - - - - - - - - - - - - - - - - - - - */
 
-	public abstract void attaquerCUT(Troupe troupe) ;
-
-	public abstract void attaquerTUT(Troupe troupe) ;
+	public abstract void attaquerTUT(Troupe troupe);
 
 	// *********** gestion de la position ***********
 
@@ -96,7 +87,6 @@ public abstract class Unite {
 	}
 
 	// *********** les getters et setters **************
-
 
 	public int getCc() {
 		return cc;

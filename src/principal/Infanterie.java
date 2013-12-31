@@ -18,7 +18,6 @@ public class Infanterie extends Unite {
 		this.save();
 		this.getArmeT().attaquerT(this, defenseur);
 		this.reset();
-
 	}
 
 	public void attaquerC(Vehicule defenseur) {
@@ -60,7 +59,7 @@ public class Infanterie extends Unite {
 	// ATTENTION ces deux methodes s'appellent respectivement au debut et a la
 	// fin des methodes de combat!!!
 
-	private int ccs, cts, fs, es, is, as, cds, svgS;
+	private int ccs, cts, fs, es, is, as, cdS, svgS;
 	private ArmeT armeTs;
 	private ArmeC armeCs;
 
@@ -71,7 +70,7 @@ public class Infanterie extends Unite {
 		this.es = e;
 		this.is = i;
 		this.as = a;
-		this.cds = cd;
+		this.cdS = cd;
 		this.svgS = svg;
 		this.armeTs = armeT;
 		this.armeCs = armeC;
@@ -84,10 +83,10 @@ public class Infanterie extends Unite {
 		this.e = es;
 		this.i = is;
 		this.a = as;
-		this.cds = cd;
+		this.cd = cdS;
 		this.svg = svgS;
 		this.armeT = armeTs;
-		this.armeCs = armeC;
+		this.armeC = armeCs;
 	}
 
 	// *********** les constructeurs ************
