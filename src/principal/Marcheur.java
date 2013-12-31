@@ -1,5 +1,8 @@
 package principal;
 
+import java.util.ArrayList;
+
+import de.De;
 import principal.Infanterie;
 
 public class Marcheur extends Vehicule {
@@ -18,16 +21,26 @@ public class Marcheur extends Vehicule {
 
 	// *********** attaque cc du marcheur ************
 
-	public void attaquerC(Infanterie defenseur) {
+	public void attaquerC(Unite defenseur) {
 		this.save();
-		this.armeC.attaquerC(this.getInf(), defenseur);
+		if (defenseur instanceof Infanterie) {
+			Infanterie def = (Infanterie) defenseur;
+			this.armeC.attaquerC(this.getInf(), def);
+		} else if (defenseur instanceof Vehicule) {
+			Vehicule def = (Vehicule) defenseur;
+			this.armeC.attaquerC(this.getInf(), def);
+		}
 		this.reset();
 	}
 
-	public void attaquerC(Vehicule defenseur) {
-		this.save();
-		this.armeC.attaquerC(this.getInf(), defenseur);
-		this.reset();
+	public void attaquerCUT(Troupe troupe) {
+		// on selectionne le defenseur
+		ArrayList<Unite> troupeDef = troupe.getTroupe();
+		int size = troupeDef.size();
+		De de = new De(size);
+		Unite def = troupeDef.get(de.jet() - 1);
+
+		this.attaquerC(def);
 	}
 
 	// ********** equivalent infanterie d'un marcheur *************

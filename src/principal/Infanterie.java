@@ -2,6 +2,8 @@ package principal;
 
 import java.util.ArrayList;
 
+import de.De;
+
 public class Infanterie extends Unite {
 	protected ArmeC armeC;
 	protected ArmeT armeT;
@@ -32,26 +34,48 @@ public class Infanterie extends Unite {
 		this.reset();
 	}
 
-	// ************** les attaques de troupes *********
+	/* - - - - - - - - - simplification - - - - - - - - - - - - */
 
-	public void attaquerCUT(Troupe troupe) {
-		ArrayList<Unite> tr = troupe.getTroupe();
-		for (Unite defenseur : tr) {
-			for (int i = 0; i < this.getA(); i++) {
-				this.attaquerC(defenseur);
-				troupe.restructure();
-			}
+	public void attaquerT(Unite defenseur) {
+		if (defenseur instanceof Infanterie) {
+			Infanterie def = (Infanterie) defenseur;
+			this.attaquerT(def);
+		} else if (defenseur instanceof Vehicule) {
+			Vehicule def = (Vehicule) defenseur;
+			this.attaquerT(def);
 		}
 	}
 
-	public void attaquerTUT(Troupe troupe) {
-		ArrayList<Unite> tr = troupe.getTroupe();
-		for (Unite defenseur : tr) {
-			for (int i = 0; i < this.getArmeT().getNbTir(); i++) {
-				this.attaquerT(defenseur);
-				troupe.restructure();
-			}
+	public void attaquerC(Unite defenseur) {
+		if (defenseur instanceof Infanterie) {
+			Infanterie def = (Infanterie) defenseur;
+			this.attaquerC(def);
+		} else if (defenseur instanceof Vehicule) {
+			Vehicule def = (Vehicule) defenseur;
+			this.attaquerC(def);
 		}
+	}
+
+	// ************** les attaques de troupes *********
+
+	public void attaquerCUT(Troupe troupe) {
+		// on selectionne le defenseur
+		ArrayList<Unite> troupeDef = troupe.getTroupe();
+		int size = troupeDef.size();
+		De de = new De(size);
+		Unite def = troupeDef.get(de.jet() - 1);
+
+		this.attaquerC(def);
+	}
+
+	public void attaquerTUT(Troupe troupe) {
+		// on selectionne le defenseur
+		ArrayList<Unite> troupeDef = troupe.getTroupe();
+		int size = troupeDef.size();
+		De de = new De(size);
+		Unite def = troupeDef.get(de.jet() - 1);
+
+		this.attaquerT(def);
 	}
 
 	// ********** la memoire de la classe ********

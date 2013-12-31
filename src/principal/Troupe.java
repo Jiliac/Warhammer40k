@@ -14,6 +14,9 @@ public class Troupe {
 			if (attaquant instanceof Infanterie) {
 				Infanterie atInf = (Infanterie) attaquant;
 				atInf.attaquerCUT(troupeDef);
+			} else if (attaquant instanceof Marcheur) {
+				Marcheur atMar = (Marcheur) attaquant;
+				atMar.attaquerCUT(troupeDef);
 			}
 		}
 	}

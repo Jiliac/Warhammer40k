@@ -2,8 +2,11 @@ package principal;
 
 import java.util.ArrayList;
 
-import principal.vehicule.ArmeMarquee;
+import principal.armeT.attaqueT.AttaqueSurface;
+import principal.armeT.attaqueT.AttaqueT;
+import principal.armeT.attaqueTSurface.ToucheTExplosionMere;
 import principal.vehicule.ArmeV;
+import de.De;
 import de.De6;
 
 //Attaque au cc à faire mais bon, c'est pas important donc je le ferais plus tard
@@ -11,34 +14,28 @@ public class Vehicule extends Unite {
 	protected String etatMouvement;
 	protected ArmeV armeV;
 
-	// ****************** actions **********************
+	// ************ attaque de troupe ***************
 
-	public void attaquerT(Infanterie defenseur) {
-		this.save();
-		
-		// on set les armes à utiliser
-		if (this.etatMouvement == "immobile") {
-			armeV.setUtilisable();
-		} else if (this.etatMouvement == "combat") {
-			ArmeT armeT = this.choisirArme();
-			armeV.setUniqueUtilisable(armeT);
-		} else if (this.etatMouvement == "manoeuvre") {
-			armeV.setInutilisable();
-		}
+	public void attaquerTUT(Troupe troupe) {
+		// on selectionne le defenseur
+		ArrayList<Unite> troupeDef = troupe.getTroupe();
+		int size = troupeDef.size();
+		De de = new De(size);
+		Unite def = troupeDef.get(de.jet() - 1);
 
-		// et on utilise ces armes
+		// et on attaque
 		ArrayList<ArmeT> armeAttaquante = armeV.getUtilisable();
 		for (ArmeT armeT : armeAttaquante) {
-			armeT.attaquerT(this, defenseur);
+			this.save();
+			armeT.attaquerT(this, def);
+			this.reset();
+			troupe.restructure();
 		}
-		
-		this.reset();
 	}
 
-	public void attaquerT(Vehicule defenseur) {
-		this.save();
-		
-		// on set les armes à utiliser
+	// *********** gestion des armes ****************
+
+	public void setUtilisable() {
 		if (this.etatMouvement == "immobile") {
 			armeV.setUtilisable();
 		} else if (this.etatMouvement == "combat") {
@@ -47,14 +44,6 @@ public class Vehicule extends Unite {
 		} else if (this.etatMouvement == "manoeuvre") {
 			armeV.setInutilisable();
 		}
-
-		// et on utilise ces armes
-		ArrayList<ArmeT> armeAttaquante = armeV.getUtilisable();
-		for (ArmeT armeT : armeAttaquante) {
-			armeT.attaquerT(this, defenseur);
-		}
-		
-		this.reset();
 	}
 
 	private ArmeT choisirArme() {
@@ -65,18 +54,6 @@ public class Vehicule extends Unite {
 		return armeT;
 	}
 
-	// ************ attaque de troupe ***************
-
-	public void attaquerTUT(Troupe troupe) {
-		ArrayList<Unite> tr = troupe.getTroupe();
-		for (Unite defenseur : tr) {
-			for (int i = 0; i < this.getArmeT().getNbTir(); i++) {
-				this.attaquerT(defenseur);
-				troupe.restructure();
-			}
-		}
-	}
-
 	// ********** les jets de degats *****************
 
 	public void secouer() {
@@ -84,15 +61,25 @@ public class Vehicule extends Unite {
 	}
 
 	public void sonne() {
-
+		
 	}
 
 	public void armeDetruite() {
-
+		ArrayList<ArmeT> al = this.armeV.getUtilisable();
+		if(al.size()==0)
+			this.immobilise();
+		else {
+			// EN FAIT IL FAUDRAIT FAIRE UN CHOIX
+			De de = new De(al.size());
+			ArmeT armeDetruite = al.get(de.jet()-1);
+			
+			//	PROBLEME AVEC LA MEMOIRE DE LA CLASSE
+			// COMMENT FAIRE ? QUELS SONT LES CAS A DISTINGUER ?
+		}
 	}
 
 	public void immobilise() {
-
+		// modifier la methode seDeplace !!!!!!!!!!!!!!!!!!!!
 	}
 
 	public void epave() {
@@ -101,9 +88,14 @@ public class Vehicule extends Unite {
 
 	public void explosion() {
 		this.pertePv();
+
 		De6 de = new De6();
 		int rayon = de.jet();
-		// et la j'ai plein de problemes, les unites prises dans explosions
+
+		ArmeT armeExplosion = new ArmeT(rayon, 3, 7, 1);
+		AttaqueT at = new AttaqueSurface(this, new ToucheTExplosionMere(this,
+				this.posX, this.posY, rayon, armeExplosion), armeExplosion);
+		at.attaquerT();
 	}
 
 	// ************* constructeur de combat ***********

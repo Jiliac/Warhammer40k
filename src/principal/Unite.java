@@ -5,23 +5,7 @@ public abstract class Unite {
 	protected int blAvant, blFlanc, blArriere;
 	protected int posX = 0, posY = 0;
 
-	// ***************** les actions ****************
-
-	public abstract void attaquerT(Infanterie defenseur);
-
-	public abstract void attaquerT(Vehicule defenseur);
-
 	/* - - - - - - - - - - - - - - - - - - - - - - - - */
-
-	public void attaquerC(Unite defenseur) {
-		if (defenseur instanceof Infanterie) {
-			Infanterie def = (Infanterie) defenseur;
-			this.attaquerC(def);
-		} else if (defenseur instanceof Vehicule) {
-			Vehicule def = (Vehicule) defenseur;
-			this.attaquerC(def);
-		}
-	}
 
 	public void attaquerT(Unite defenseur) {
 		if (defenseur instanceof Infanterie) {
