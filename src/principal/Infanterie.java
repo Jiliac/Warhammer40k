@@ -3,6 +3,7 @@ package principal;
 import java.util.ArrayList;
 
 import de.De;
+import de.De6;
 
 public class Infanterie extends Unite {
 	protected ArmeC armeC;
@@ -111,6 +112,48 @@ public class Infanterie extends Unite {
 		this.svg = svgS;
 		this.armeT = armeTs;
 		this.armeC = armeCs;
+	}
+
+	// ************* gestion des deplacements ************
+
+	public void deplace(int rayon, int angle) {
+		Terrain terrain = new Terrain(100, 100);
+		String typeTerrain = terrain.getTypeTerrain();
+		int rayonReel;
+		if (typeTerrain == "normal") {
+			// affectation de rayonReel
+			if (rayon <= 6)
+				rayonReel = rayon;
+			else
+				rayonReel = 6;
+
+			// probleme de precision à cause des int
+			this.posX += rayonReel * Math.cos(angle);
+			this.posY += rayonReel * Math.sin(angle);
+		} else if (typeTerrain == "difficile") {
+			De6 de = new De6();
+
+			// double jet
+			int jet;
+			int jet1 = de.jet(), jet2 = de.jet();
+			if (jet1 >= jet2)
+				jet = jet1;
+			else
+				jet = jet2;
+
+			// affectation de rayonReel
+			if (jet <= rayon)
+				rayonReel = jet;
+			else
+				rayonReel = rayon;
+			if (rayonReel > 6)
+				rayonReel = 6;
+
+			// probleme de precision à cause des int
+			this.posX += rayonReel * Math.cos(angle);
+			this.posY += rayonReel * Math.sin(angle);
+		} else if (typeTerrain == "infranchissable") {
+		}
 	}
 
 	// *********** les constructeurs ************

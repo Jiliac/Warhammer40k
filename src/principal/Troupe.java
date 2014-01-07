@@ -2,6 +2,8 @@ package principal;
 
 import java.util.ArrayList;
 
+import principal.vehicule.Marcheur;
+
 public class Troupe {
 	ArrayList<Unite> troupe;
 	int nbMin, nbMax;

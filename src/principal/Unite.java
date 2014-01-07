@@ -21,12 +21,16 @@ public abstract class Unite {
 
 	public abstract void attaquerTUT(Troupe troupe);
 
-	// *********** gestion de la position ***********
+	// *********** gestion des deplacements ***********
 
 	public boolean isDeplace() {
 		// encore un truc a faire quand je ferais les deplacement...
 		return false;
 	}
+
+	public abstract void deplace(int rayon, int angle);
+
+	// *********** gestion de la position ***********
 
 	public double Distance(Unite attaquant, Unite defenseur) {
 		int posXA, posYA, posXD, posYD;

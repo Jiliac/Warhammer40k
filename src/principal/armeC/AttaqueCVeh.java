@@ -2,7 +2,7 @@ package principal.armeC;
 
 import principal.ArmeC;
 import principal.Infanterie;
-import principal.Marcheur;
+import principal.vehicule.Marcheur;
 import principal.Vehicule;
 
 public class AttaqueCVeh implements AttaqueC {

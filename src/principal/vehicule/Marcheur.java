@@ -1,9 +1,13 @@
-package principal;
+package principal.vehicule;
 
 import java.util.ArrayList;
 
 import de.De;
+import principal.ArmeC;
 import principal.Infanterie;
+import principal.Troupe;
+import principal.Unite;
+import principal.Vehicule;
 
 public class Marcheur extends Vehicule {
 	ArmeC armeC;
@@ -45,8 +49,8 @@ public class Marcheur extends Vehicule {
 
 	// ********** equivalent infanterie d'un marcheur *************
 
-	public Infanterie getInf() {
-		Infanterie inf = new Infanterie(cc, ct, f, 0, 1, i, a, 12, 7);
+	public InfanterieMarcheur getInf() {
+		InfanterieMarcheur inf = new InfanterieMarcheur(cc, ct, f, 0, 1, i, a, 12, 7,this);
 		return inf;
 	}
 
